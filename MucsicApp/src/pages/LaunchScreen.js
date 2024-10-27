@@ -10,7 +10,7 @@ export default function LaunchScreen({navigation}) {
             <Text style={{fontSize: 40, fontWeight: 'bold', color: '#fff', marginTop: 300}}>Your music</Text>
             <Text style={{fontSize: 40, fontWeight: 'bold', color: '#fff'}}>Your</Text>
             <Text style={{fontSize: 40, fontWeight: 'bold', color: '#fff'}}>artists</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('HomeAudioListing')} style={{backgroundColor: '#000', width: '90%', alignItems: 'center', padding: 10, borderRadius: 30, marginTop: 100}}>
+            <TouchableOpacity onPress={() => navigation.navigate('MainTabs', { screen: 'HomeAudioListing' })} style={{backgroundColor: '#000', width: '90%', alignItems: 'center', padding: 10, borderRadius: 30, marginTop: 100}}>
                 <Text style={{color: '#fff', fontSize: 20}}>Create an account</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{backgroundColor: '#fff', width: '90%', alignItems: 'center', padding: 10, borderRadius: 30, marginTop: 20}}>
