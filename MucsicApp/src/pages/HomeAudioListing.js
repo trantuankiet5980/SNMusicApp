@@ -38,9 +38,31 @@ export default function HomeAudioListing({navigation}) {
                 <View style={{marginLeft: 25, marginTop: 50}}>
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>Suggestions for you</Text>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={{flexDirection: 'row', marginTop: 20}}>
+                        <View style={{flexDirection: 'row', marginTop: 10}}>
                             <Image source={require('../../assets/Home - Audio Listing/Container 26.png')} />
                             <Image source={require('../../assets/Home - Audio Listing/Container 27.png')} style={{marginLeft: 20}} />
+                        </View>
+                    </ScrollView>
+                </View>
+                <View style={{marginLeft: 25, marginTop: 20}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginRight: 20, alignItems: 'center'}}>
+                        <Text style={{fontSize: 22, fontWeight: 'bold'}}>Charts</Text>
+                        <TouchableOpacity>
+                            <Text style={{fontSize: 14, fontWeight: '200'}}>See all</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        <View style={{width: 150}}>
+                            <Image source={require('../../assets/Home - Audio Listing/Container 31.png')} />
+                            <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
+                        </View>
+                        <View style={{width: 150}}>
+                            <Image source={require('../../assets/Home - Audio Listing/Container 32.png')} />
+                            <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
+                        </View>
+                        <View style={{width: 150}}>
+                            <Image source={require('../../assets/Home - Audio Listing/Container 33.png')} />
+                            <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
                         </View>
                     </ScrollView>
                 </View>
