@@ -1,4 +1,4 @@
-import {Text, View, Image, TouchableOpacity, Button, TextInput } from 'react-native';
+import {Text, View, Image, TouchableOpacity, Button, TextInput, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -26,15 +26,25 @@ export default function HomeAudioListing({navigation}) {
     }, []);
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-            <View style={{marginLeft: 25, marginRight: 20}}>
-                <Text style={{fontSize: 18, fontWeight: '200'}}>{greeting},</Text>
-                <Text style={{fontSize: 25,fontWeight: 'bold'}}>Tran Tuan Kiet</Text>
-                <View style={{flexDirection: 'row', borderWidth: 1, marginTop: 15, alignItems: 'center', borderRadius: 30}}>
-                    <Icon name="search" size={20} color="#000" style={{padding: 10}} />
-                    <TextInput placeholder="What you want to listen to" style={{fontSize: 16, fontWeight: '200'}} />
+            <ScrollView>
+                <View style={{marginLeft: 25, marginRight: 20, marginTop: -20}}>
+                    <Text style={{fontSize: 18, fontWeight: '200'}}>{greeting},</Text>
+                    <Text style={{fontSize: 25,fontWeight: 'bold'}}>Tran Tuan Kiet</Text>
+                    <View style={{flexDirection: 'row', borderWidth: 0.3, marginTop: 15, alignItems: 'center', borderRadius: 30}}>
+                        <Icon name="search" size={20} color="#000" style={{padding: 12}} />
+                        <TextInput placeholder="What you want to listen to" style={{fontSize: 17, fontWeight: '200'}} />
+                    </View>
                 </View>
-            </View>
-            <Button title="Go to HomeAudioListing" onPress={() => navigation.navigate('LaunchScreen')} />
+                <View style={{marginLeft: 25, marginTop: 50}}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>Suggestions for you</Text>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        <View style={{flexDirection: 'row', marginTop: 20}}>
+                            <Image source={require('../../assets/Home - Audio Listing/Container 26.png')} />
+                            <Image source={require('../../assets/Home - Audio Listing/Container 27.png')} style={{marginLeft: 20}} />
+                        </View>
+                    </ScrollView>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
