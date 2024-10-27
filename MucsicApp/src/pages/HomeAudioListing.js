@@ -8,7 +8,7 @@ export default function HomeAudioListing({navigation}) {
 
   useEffect(() => {
     const updateGreeting = () => {
-        const hour = new Date().getHours(); // Lấy giờ hiện tại
+        const hour = new Date().getHours();
         if (hour >= 0 && hour < 10) {
             setGreeting('Good Morning');
         } else if (hour >= 10 && hour < 18) {
@@ -18,15 +18,15 @@ export default function HomeAudioListing({navigation}) {
         }
     };
 
-    updateGreeting(); // Cập nhật lời chào ban đầu
+    updateGreeting(); 
 
-    const interval = setInterval(updateGreeting, 60000); // Cập nhật mỗi phút
+    const interval = setInterval(updateGreeting, 60000);
 
     return () => clearInterval(interval);
     }, []);
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-            <View style={{marginTop: -20, marginLeft: 25, marginRight: 20}}>
+            <View style={{marginLeft: 25, marginRight: 20}}>
                 <Text style={{fontSize: 18, fontWeight: '200'}}>{greeting},</Text>
                 <Text style={{fontSize: 25,fontWeight: 'bold'}}>Tran Tuan Kiet</Text>
                 <View style={{flexDirection: 'row', borderWidth: 1, marginTop: 15, alignItems: 'center', borderRadius: 30}}>
