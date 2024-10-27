@@ -3,7 +3,7 @@ import { Image, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import IconFeather from "react-native-vector-icons/Feather";
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MyLibrary from '../pages/MyLibrary';
 import HomeAudioListing from '../pages/HomeAudioListing';
@@ -49,7 +49,7 @@ const HomeStackScreen = () => (
                 headerShadowVisible: false,
                 headerRight: () => (
                     <TouchableOpacity>
-                        <IconFeather name="radio" size={30} color="#000" style={{ marginRight: 20 }} />
+                        <IconEntypo name="radio" size={30} color="#000" style={{ marginRight: 20 }} />
                     </TouchableOpacity>
                 ),
             }}
@@ -64,13 +64,13 @@ const TabNavigator = () => {
                 tabBarStyle: {
                     borderTopWidth: 0,
                     elevation: 0,
-                    height: 80,
+                    height: 100,
                 },
                 tabBarLabelStyle: {
                     fontSize: 14,
                     fontWeight: 'bold',
                     marginBottom: 30,
-                    marginTop: 5,
+                    marginTop: -20,
                 },
             }}
         >
