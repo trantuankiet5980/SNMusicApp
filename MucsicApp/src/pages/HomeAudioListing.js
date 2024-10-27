@@ -54,18 +54,24 @@ export default function HomeAudioListing({navigation}) {
                         </TouchableOpacity>
                     </View>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={{width: 150}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Container 31.png')} />
-                            <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
-                        </View>
-                        <View style={{width: 150, marginLeft: 10}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Container 32.png')} />
-                            <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
-                        </View>
-                        <View style={{width: 150, marginLeft: 10}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Container 33.png')} />
-                            <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
-                        </View>
+                        <TouchableOpacity onPress={() => navigation.navigate('PlayListDetailsAudio', {imageSource: require('../../assets/Home - Audio Listing/Container 31.png'), name: 'Top 50 - Canada'})}>
+                            <View style={{width: 150}}>
+                                <Image source={require('../../assets/Home - Audio Listing/Container 31.png')} />
+                                <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('PlayListDetailsAudio', {imageSource: require('../../assets/Home - Audio Listing/Container 32.png'), name: 'Top 50 - Global'})}>
+                            <View style={{width: 150, marginLeft: 10}}>
+                                <Image source={require('../../assets/Home - Audio Listing/Container 32.png')} />
+                                <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('PlayListDetailsAudio', {imageSource: require('../../assets/Home - Audio Listing/Container 33.png'), name: 'Top 50 - Trending'})}>
+                            <View style={{width: 150, marginLeft: 10}}>
+                                <Image source={require('../../assets/Home - Audio Listing/Container 33.png')} />
+                                <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>
+                            </View>
+                        </TouchableOpacity>
                     </ScrollView>
                 </View>
                 {/* Trending albums */}
