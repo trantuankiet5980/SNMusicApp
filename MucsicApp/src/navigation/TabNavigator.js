@@ -42,7 +42,7 @@ const TabNavigator = ({navigation}) => {
                         </TouchableOpacity>
                     ),
                     headerRight: () => (
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
                             <TouchableOpacity>
                                 <Icon name="bell" size={30} color="#000" />
                             </TouchableOpacity>
