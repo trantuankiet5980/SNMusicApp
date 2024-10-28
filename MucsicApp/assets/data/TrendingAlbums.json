@@ -2,26 +2,166 @@
     {"id": 1,
     "image": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/7/9/818561/Jack.jpg",
     "title": "Jack",
-    "name": "Phương Tuấn"
+    "name": "Phương Tuấn",
+    "followers": "6.12M",
+    "description": "Jack – J97 bắt đầu được biết đến khi hoạt động trong nhóm nhạc G5R và phát hành bài hát Hồng nhan. Trong suốt sự nghiệp của mình, anh đã nhận được năm giải Làn Sóng Xanh, một giải Mai Vàng, một giải WeChoice Awards và bốn giải Zing Music Awards. Ngoài ra, anh còn được trao giải thưởng Nghệ sĩ Châu Á mới xuất sắc nhất tại Việt Nam ở lễ trao giải Mnet Asian Music Awards 2019, giành chiến thắng ở hạng mục Video âm nhạc hay nhất tại giải thưởng Truyền hình châu Á 2020 và cũng chiến thắng giải Nghệ sĩ Đông Nam Á xuất sắc nhất tại MTV EMA 2020.",
+    "populars":
+        [
+            {"title": "Hoa Hải Đường",
+            "image": "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/a/8/6/2/a8626a5671f5a01250a074c4c8140cae.jpg",
+            "views": "218M",
+            "time": "4:13"
+            },
+            {"title": "Đom Đóm",
+            "image": "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/f/e/9/8/fe9875941d98fbbcb8aedc8960ccbc94.jpg",
+            "views": "156M",
+            "time": "6:22"
+            },
+            {"title": "Bạc Phận",
+            "image": "https://cdn.tuoitre.vn/thumb_w/480/2019/6/19/jack-1560931851558668237008.jpg",
+            "views": "413M",
+            "time": "4:17"
+            },
+            {"title": "Hồng Nhan",
+            "image": "https://media.viez.vn/prod/2021/9/19/vf0_1b30109956.jpg",
+            "views": "21M",
+            "time": "4:10"
+            },
+            {"title": "Thiên Lý Ơi",
+            "image": "https://i1.sndcdn.com/artworks-BWJgBLZhC32e-0-t500x500.jpg",
+            "views": "28M",
+            "time": "5:08"
+            }
+        ]
     },
     {"id": 2,
     "image": "https://cdn-media.sforum.vn/storage/app/media/Van%20Pham/1/top-ca-si-viet-nam-1.jpg",
     "title": "MTP",
-    "name": "Sơn Tùng"
+    "name": "Sơn Tùng",
+    "followers": "10.5M",
+    "description": "Nguyễn Thanh Tùng (sinh ngày 5 tháng 7 năm 1994), thường được biết đến với nghệ danh Sơn Tùng M-TP, là một nam ca sĩ kiêm sáng tác nhạc, nhà sản xuất thu âm, rapper và diễn viên người Việt Nam. Nổi tiếng vì tầm ảnh hưởng sâu rộng đối với âm nhạc Việt Nam, anh được mệnh danh là Hoàng tử V-pop bởi Giải thưởng Âm nhạc Thế giới và BroadwayWorld. Nhiều nhà báo âm nhạc, nhà lý luận phê bình và tác giả đánh giá Sơn Tùng M-TP là một trong những nghệ sĩ V-pop xuất sắc nhất trong thế hệ của mình.",
+    "populars":
+        [
+            {"title": "Đừng Làm Trái Tim Anh Đau",
+            "image": "https://fonttiengviet.com/wp-content/uploads/2024/06/DLTTAD.jpg",
+            "views": "103M",
+            "time": "5:26"
+            },
+            {"title": "Chúng Ta Của Tương Lai",
+            "image": "https://thegioigiaitri.com.vn/wp-content/uploads/2024/02/CTCTL_Main-Poster-1.jpg",
+            "views": "70M",
+            "time": "4:37"
+            },
+            {"title": "Chúng Ta Của Hiện Tại",
+            "image": "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/f/0/c/6/f0c6b74652e9ed643f3183c7617aaa30.jpg",
+            "views": "101M",
+            "time": "5:13"
+            },
+            {"title": "Lạc Trôi",
+            "image": "https://upload.wikimedia.org/wikipedia/vi/5/5d/Lac_troi_single_sontungmtp.jpg",
+            "views": "21M",
+            "time": "4:20"
+            },
+            {"title": "Hãy Trao Cho Anh",
+            "image": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2019/7/1/741911/Hay-Trao-Cho-Anh.jpg",
+            "views": "289M",
+            "time": "4:23"
+            }
+        ]
     },
     {"id": 3,
     "image": "https://images2.thanhnien.vn/528068263637045248/2024/1/7/3-onl-1704630895178505126413.jpg",
     "title": "Rapper",
-    "name": "Hiếu Thứ Hai"
+    "name": "Hiếu Thứ Hai",
+    "followers": "2M",
+    "description": "Trần Minh Hiếu (sinh ngày 28 tháng 9 năm 1999), thường được biết đến với nghệ danh Hieuthuhai (viết cách điệu là HIEUTHUHAI hay cách viết khác là hieuthuhai),là một nam rapper, ca sĩ kiêm sáng tác nhạc người Việt Nam. Anh hiện đang là thành viên của tổ đội GERDNANG.",
+    "populars":
+        [
+            {"title": "Không Phải Gu",
+            "image": "https://kenh14cdn.com/zoom/600_315/203336854389633024/2023/10/19/photo1697683197442-16976831976671513884584.jpg",
+            "views": "38M",
+            "time": "4:10"
+            },
+            {"title": "Vệ Tinh",
+            "image": "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/4/9/f/6/49f6f7ebf517b9a6b2bc47abd6abfa32.jpg",
+            "views": "21M",
+            "time": "4:27"
+            },
+            {"title": "Nghe Như Tình Yêu",
+            "image": "https://avatar-ex-swe.nixcdn.com/song/2021/07/09/5/5/8/2/1625837174082_640.jpg",
+            "views": "18M",
+            "time": "5:13"
+            },
+            {"title": "Cua",
+            "image": "https://i1.sndcdn.com/artworks-2VzsDyLQyWbjf0uD-aOtO8Q-t500x500.jpg",
+            "views": "50M",
+            "time": "4:19"
+            },
+            {"title": "Không Thể Say",
+            "image": "https://i1.sndcdn.com/artworks-zPyHZZgwvGgGFzWa-T0DN8w-t500x500.jpg",
+            "views": "7M",
+            "time": "4:13"
+            }
+        ]
     },
     {"id": 4,
     "image": "https://vcdn1-giaitri.vnecdn.net/2024/07/05/dinvinanht-1720150482-17201505-5638-7846-1720150529.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=hLE6Ve_BO70NqkTj2XjH-w",
     "title": "Rapper",
-    "name": "Anh Tú Atus"
+    "name": "Anh Tú Atus",
+    "followers": "2M",
+    "description": "Bùi Anh Tú (sinh ngày 3 tháng 10 năm 1993), thường được biết đến với nghệ danh Anh Tú hay Anh Tú Atus, là một nam diễn viên kiêm ca sĩ người Việt Nam. Anh nổi tiếng qua vai diễn đầu tay trong bộ phim Hà Nội em yêu anh (2013).",
+    "populars":
+        [
+            {"title": "Không Nhất Thiết Phải Cùng Nhau",
+            "image": "https://avatar-ex-swe.nixcdn.com/playlist/2023/01/16/4/0/5/8/1673839564172.jpg",
+            "views": "28M",
+            "time": "4:13"
+            },
+            {"title": "Cho Con Tim Một Lý Do",
+            "image": "https://avatar-ex-swe.nixcdn.com/playlist/2017/10/17/e/3/c/0/1508223939173.jpg",
+            "views": "30M",
+            "time": "4:20"
+            },
+            {"title": "Crazy Lady",
+            "image": "https://avatar-ex-swe.nixcdn.com/playlist/2018/02/06/6/4/7/3/1517907252992.jpg",
+            "views": "20M",
+            "time": "5:12"
+            },
+            {"title": "Yêu Hết Nỗi Đau Này",
+            "image": "https://avatar-ex-swe.nixcdn.com/playlist/2018/08/09/a/2/3/f/1533798772123.jpg",
+            "views": "7M",
+            "time": "4:38"
+            },
+            {"title": "Let Me Know",
+            "image": "https://avatar-ex-swe.nixcdn.com/playlist/2017/12/06/4/7/7/e/1512550519153.jpg",
+            "views": "39M",
+            "time": "4:56"
+            }
+        ]
     },
     {"id": 5,
     "image": "https://kenh14cdn.com/2020/4/21/photo-1-15874085564151643768623.jpg",
     "title": "Mixi",
-    "name": "Phùng Thanh Độ"
+    "name": "Phùng Thanh Độ",
+    "followers": "7.72M",
+    "description": "Độ Mixi tên thật là Phùng Thanh Độ sinh ngày 12 tháng 9 năm 1989 tại thành phố Cao Bằng, tỉnh Cao Bằng. Là người dân tộc Tày. Anh là con thứ hai trong gia đình có 2 anh em, bố mẹ anh đều làm nhà nước. Từ nhỏ anh đã có đam mê với máy tính. Theo như chia sẻ anh đã tìm tòi và học hỏi photoshop từ năm lớp 8, lớp 9. Anh theo học tại trường Cao đẳng Bách Khoa (sau đó liên thông lên Học viện quản lý giáo dục) ở Hà Nội, nhưng sau đó anh lại làm về mảng du lịch.",
+    "populars":
+        [
+            {"title": "Stream Đến Bao Giờ",
+            "image": "https://avatar-ex-swe.nixcdn.com/song/2023/02/08/f/b/7/8/1675826886037_640.jpg",
+            "views": "34M",
+            "time": "4:42"
+            },
+            {"title": "Độ Tộc 2",
+            "image": "https://i.ytimg.com/vi/Jk38OqdAQxc/maxresdefault.jpg",
+            "views": "63M",
+            "time": "3:31"
+            },
+            {"title": "NÓNG! Hông Làm Quá",
+            "image": "https://avatar-ex-swe.nixcdn.com/song/2023/07/13/a/e/f/0/1689222305039_640.jpg",
+            "views": "3.3M",
+            "time": "3:55"
+            }
+        ]
     }
 ]

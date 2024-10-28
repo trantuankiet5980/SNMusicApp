@@ -95,7 +95,7 @@ export default function HomeAudioListing({navigation}) {
                             <Text style={{fontSize: 14, fontWeight: '200'}}>See all</Text>
                         </TouchableOpacity>
                     </View>
-                    <PopularArtistsList />
+                    <PopularArtistsList navigation={navigation} />
                 </View>
                 
             </ScrollView>
