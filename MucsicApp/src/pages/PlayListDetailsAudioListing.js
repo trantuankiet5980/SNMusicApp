@@ -89,7 +89,7 @@ export default function PlayListDetailsAudioListing({navigation, route }) {
             <PlayListAudio onItemPress={handleItemPress} />
             {selectedItem && (
                 <View style={{ backgroundColor: 'black', height: 80, marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('PlayAnAudio', {mucsicSelected: selectedItem})} style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('PlayAnAudio', {mucsicSelected: selectedItem, sound})} style={{ flexDirection: 'row' }}>
                         <Image source={{ uri: selectedItem.artwork }} style={{ width: 50, height: 50, marginRight: 20, marginLeft: 20, borderRadius: 5 }} />
                         <View>
                             <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>{selectedItem.artist}</Text>

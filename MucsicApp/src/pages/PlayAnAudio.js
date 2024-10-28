@@ -1,30 +1,66 @@
-import React, { useEffect, useRef  } from "react";
+import React, { useEffect, useRef, useState  } from "react";
 import { TouchableOpacity, Animated } from "react-native";
 import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import IconFeather from "react-native-vector-icons/Feather";
 import IconEntypo from "react-native-vector-icons/Entypo";
+import { Audio } from 'expo-av';
 
 export default function PlayAnAudio({navigation, route }) {
-    const { mucsicSelected } = route.params;
+    const { mucsicSelected, sound } = route.params;
     const slideAnim = useRef(new Animated.Value(0)).current;
+    // const [sound, setSound] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(true);
   
-    useEffect(() => {
-      Animated.timing(slideAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
+   useEffect(() => {
+        // Animation khi mở component
+        Animated.timing(slideAnim, {
+            toValue: 1,
+            duration: 300,
+            useNativeDriver: true,
+        }).start();
+
+        // Tạo đối tượng âm thanh khi component được mount
+        // const loadSound = async () => {
+        //     const { sound } = await Audio.Sound.createAsync(
+        //         { uri: mucsicSelected.url },
+        //         { shouldPlay: true }
+        //     );
+        //     setSound(sound);
+        //     setIsPlaying(true); // Ban đầu phát nhạc luôn khi mở component
+        // };
+        // loadSound();
+        // setIsPlaying(true);
+        // setSound(mucsicSelected.uri);
+
+        return () => {
+            // Unload âm thanh khi component bị unmount
+            if (sound) {
+                sound.stopAsync();
+                sound.unloadAsync();
+            }
+        };
     }, []);
-  
+    const handlePlayPause = async () => {
+        if (isPlaying) {
+            // Nếu nhạc đang phát, tạm dừng nhạc
+            await sound.pauseAsync();
+        } else {
+            // Nếu nhạc đang dừng, phát lại nhạc
+            await sound.playAsync();
+        }
+        setIsPlaying(!isPlaying); // Cập nhật trạng thái isPlaying
+    };
+
     const handleClose = () => {
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start(() => {
-        navigation.goBack();
-      });
+        // Animation khi đóng component
+        Animated.timing(slideAnim, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true,
+        }).start(() => {
+            navigation.goBack();
+        });
     };
   return (
     <SafeAreaView style={{ flex: 1}}>
@@ -76,9 +112,12 @@ export default function PlayAnAudio({navigation, route }) {
                 <TouchableOpacity>
                     <IconEntypo name="controller-jump-to-start" size={30} color="#fff" />
                 </TouchableOpacity>
-                <TouchableOpacity style={{height: 70, width: 70, borderRadius: 50, backgroundColor: '#fff', alignItems:'center', justifyContent: 'center'}}>
-                    <IconEntypo name="controller-play" size={30} color="#fff" />
-                </TouchableOpacity>
+                <TouchableOpacity
+                            onPress={handlePlayPause}
+                            style={{ height: 70, width: 70, borderRadius: 50, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                            <IconEntypo name={isPlaying ? "controller-paus" : "controller-play"} size={30} color="#000" />
+                        </TouchableOpacity>
                 <TouchableOpacity>
                     <IconEntypo name="controller-next" size={30} color="#fff" />
                 </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import LaunchScreen from "./src/pages/LaunchScreen";
@@ -7,6 +7,7 @@ import IconFeather from "react-native-vector-icons/Feather";
 import TabNavigator from "./src/navigation/TabNavigator";
 import PlayListDetailsAudio from "./src/pages/PlayListDetailsAudioListing";
 import PlayAbAudio from "./src/pages/PlayAnAudio";
+
 
 const Stack = createNativeStackNavigator();
 export default function App() {
