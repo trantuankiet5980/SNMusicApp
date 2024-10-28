@@ -12,6 +12,7 @@ export const PlayListAudio = ({ onItemPress }) => {
             renderItem={({ item }) => (
                 <PlayListItem item={item} onItemPress={onItemPress} />
             )}
+            keyExtractor={(item) => item.id.toString()}
         />
     );
 }
