@@ -35,8 +35,7 @@ export default function PlayListDetailsAudioListing({navigation, route }) {
 
     const handleItemPress = (item) => {
         setSelectedItem(item);
-        playSound(item.url);
-        
+        playSound(item.url);  
     };
 
     const playNextSong = () => {
