@@ -6,7 +6,6 @@ import { PlayListAudio } from "../../src/components/PlayListAudio";
 import IconFeather from "react-native-vector-icons/Feather";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import playList from "../../assets/data/PlayList.json";
-import Orientation from 'react-native-orientation-locker';
 
 export default function PlayListDetailsAudioListing({navigation, route }) {
     const { imageSource, name } = route.params;
@@ -37,6 +36,7 @@ export default function PlayListDetailsAudioListing({navigation, route }) {
     const handleItemPress = (item) => {
         setSelectedItem(item);
         playSound(item.url);
+        
     };
 
     const playNextSong = () => {

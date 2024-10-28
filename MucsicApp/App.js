@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Image, TouchableOpacity } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -8,9 +9,9 @@ import TabNavigator from "./src/navigation/TabNavigator";
 import PlayListDetailsAudio from "./src/pages/PlayListDetailsAudioListing";
 import PlayAbAudio from "./src/pages/PlayAnAudio";
 
-
 const Stack = createNativeStackNavigator();
 export default function App() {
+  const [sound, setSound] = useState(null);
   return (
     <NavigationContainer>
       <Stack.Navigator>

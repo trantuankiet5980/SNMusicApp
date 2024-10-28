@@ -20,24 +20,12 @@ export default function PlayAnAudio({navigation, route }) {
             useNativeDriver: true,
         }).start();
 
-        // Tạo đối tượng âm thanh khi component được mount
-        // const loadSound = async () => {
-        //     const { sound } = await Audio.Sound.createAsync(
-        //         { uri: mucsicSelected.url },
-        //         { shouldPlay: true }
-        //     );
-        //     setSound(sound);
-        //     setIsPlaying(true); // Ban đầu phát nhạc luôn khi mở component
-        // };
-        // loadSound();
-        // setIsPlaying(true);
-        // setSound(mucsicSelected.uri);
-
         return () => {
             // Unload âm thanh khi component bị unmount
             if (sound) {
-                sound.stopAsync();
-                sound.unloadAsync();
+                // sound.stopAsync();
+                // sound.unloadAsync();
+                sound.pauseAsync();
             }
         };
     }, []);
