@@ -8,7 +8,7 @@ import IconFeather from "react-native-vector-icons/Feather";
 import TabNavigator from "./src/navigation/TabNavigator";
 import PlayListDetailsAudio from "./src/pages/PlayListDetailsAudioListing";
 import PlayAbAudio from "./src/pages/PlayAnAudio";
-import ArtistProfile from "./src/pages/ArtistProfile";
+
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -47,11 +47,7 @@ export default function App() {
           component={PlayAbAudio}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="ArtistProfile"
-          component={ArtistProfile}
-          options={{ headerShown: false }}
-        />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
