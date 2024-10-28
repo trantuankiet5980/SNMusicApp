@@ -1,22 +1,25 @@
-import {Text, View, Image, TouchableOpacity, Button, TextInput, ScrollView } from 'react-native';
+import {Text, View, Image, TouchableOpacity, FlatList, TextInput, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {TrendingAlbumList} from '../components/TrendingAlbumList';
+import { PopularArtistsList } from '../components/PopularArtistsList';
 
 export default function HomeAudioListing({navigation}) {
     const [greeting, setGreeting] = useState('');
 
-  useEffect(() => {
-    const updateGreeting = () => {
-        const hour = new Date().getHours();
-        if (hour >= 0 && hour < 10) {
-            setGreeting('Good Morning');
-        } else if (hour >= 10 && hour < 18) {
-            setGreeting('Good Afternoon');
-        } else {
-            setGreeting('Good Evening');
-        }
+    useEffect(() => {
+        const updateGreeting = () => {
+            const hour = new Date().getHours();
+            if (hour >= 0 && hour < 10) {
+                setGreeting('Good Morning');
+            } else if (hour >= 10 && hour < 18) {
+                setGreeting('Good Afternoon');
+            } else {
+                setGreeting('Good Evening');
+            }
     };
+
 
     updateGreeting(); 
 
@@ -82,29 +85,7 @@ export default function HomeAudioListing({navigation}) {
                             <Text style={{fontSize: 14, fontWeight: '200'}}>See all</Text>
                         </TouchableOpacity>
                     </View>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={{width: 150}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Image 45.png')} />
-                            <View>
-                                <Text style={{fontSize: 15, fontWeight: '500'}}>ME</Text>
-                                <Text style={{fontSize: 15, fontWeight: '200'}}>Jessica Gonzalez</Text>
-                            </View>
-                        </View>
-                        <View style={{width: 150, marginLeft: 10}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Image 46.png')} />
-                            <View>
-                                <Text style={{fontSize: 15, fontWeight: '500'}}>Magna nost</Text>
-                                <Text style={{fontSize: 15, fontWeight: '200'}}>Brian Thomas</Text>
-                            </View>
-                        </View>
-                        <View style={{width: 150, marginLeft: 10}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Image 47.png')} />
-                            <View>
-                                <Text style={{fontSize: 15, fontWeight: '500'}}>Magna nost</Text>
-                                <Text style={{fontSize: 15, fontWeight: '200'}}>Christopl Gonzalez</Text>
-                            </View>
-                        </View>
-                    </ScrollView>
+                    <TrendingAlbumList />
                 </View>
                 {/* Popular artists */}
                 <View style={{marginLeft: 25, marginTop: 20, marginBottom: 50}}>
@@ -114,29 +95,7 @@ export default function HomeAudioListing({navigation}) {
                             <Text style={{fontSize: 14, fontWeight: '200'}}>See all</Text>
                         </TouchableOpacity>
                     </View>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={{width: 150, alignItems: 'center'}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Image 39.png')} />              
-                            <Text style={{fontSize: 15, fontWeight: '500', marginTop: 10}}>Jennifer</Text>
-                            <TouchableOpacity style={{backgroundColor: '#000', borderRadius: 20, marginTop: 10, width: 70, height: 35, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 15, fontWeight: '600', color: '#fff'}}>Follow</Text> 
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{width: 150, alignItems: 'center'}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Image 40.png')} />              
-                            <Text style={{fontSize: 15, fontWeight: '500', marginTop: 10}}>Elizabeth Hall</Text>
-                            <TouchableOpacity style={{backgroundColor: '#000', borderRadius: 20, marginTop: 10, width: 70, height: 35, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 15, fontWeight: '600', color: '#fff'}}>Follow</Text> 
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{width: 150, alignItems: 'center'}}>
-                            <Image source={require('../../assets/Home - Audio Listing/Image 41.png')} />              
-                            <Text style={{fontSize: 15, fontWeight: '500', marginTop: 10}}>Anthor Kiet</Text>
-                            <TouchableOpacity style={{backgroundColor: '#000', borderRadius: 20, marginTop: 10, width: 70, height: 35, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{fontSize: 15, fontWeight: '600', color: '#fff'}}>Follow</Text> 
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
+                    <PopularArtistsList />
                 </View>
                 
             </ScrollView>
