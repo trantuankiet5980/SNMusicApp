@@ -6,6 +6,7 @@ import HomeAudioListing from "./src/pages/HomeAudioListing";
 import IconFeather from "react-native-vector-icons/Feather";
 import TabNavigator from "./src/navigation/TabNavigator";
 import PlayListDetailsAudio from "./src/pages/PlayListDetailsAudioListing";
+import PlayAbAudio from "./src/pages/PlayAnAudio";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -37,6 +38,11 @@ export default function App() {
               </TouchableOpacity>
             )
           }}
+        />
+        <Stack.Screen
+          name="PlayAnAudio"
+          component={PlayAbAudio}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

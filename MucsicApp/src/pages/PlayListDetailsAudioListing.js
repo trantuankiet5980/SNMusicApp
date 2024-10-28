@@ -6,8 +6,9 @@ import { PlayListAudio } from "../../src/components/PlayListAudio";
 import IconFeather from "react-native-vector-icons/Feather";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import playList from "../../assets/data/PlayList.json";
+import Orientation from 'react-native-orientation-locker';
 
-export default function PlayListDetailsAudioListing({ route }) {
+export default function PlayListDetailsAudioListing({navigation, route }) {
     const { imageSource, name } = route.params;
     const [selectedItem, setSelectedItem] = useState(null);
     const [sound, setSound] = useState();
@@ -61,6 +62,7 @@ export default function PlayListDetailsAudioListing({ route }) {
     };
 
     useEffect(() => {
+        
         return () => {
             if (sound) {
                 sound.stopAsync();
@@ -87,13 +89,13 @@ export default function PlayListDetailsAudioListing({ route }) {
             <PlayListAudio onItemPress={handleItemPress} />
             {selectedItem && (
                 <View style={{ backgroundColor: 'black', height: 80, marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('PlayAnAudio', {mucsicSelected: selectedItem})} style={{ flexDirection: 'row' }}>
                         <Image source={{ uri: selectedItem.artwork }} style={{ width: 50, height: 50, marginRight: 20, marginLeft: 20, borderRadius: 5 }} />
                         <View>
                             <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>{selectedItem.artist}</Text>
                             <Text style={{ color: '#fff' }}>{selectedItem.title}</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <IconFeather name="heart" size={25} color="#fff" style={{ marginRight: 20 }} />
                         {isPlaying ? (
