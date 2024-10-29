@@ -13,7 +13,6 @@ import SearchAudio from "../pages/SearchAudio";
 import PlayListDetailsAudio from "../pages/PlayListDetailsAudioListing";
 import { TouchableOpacity } from "react-native";
 
-
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
 
@@ -113,6 +112,8 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Icon name="search" color={color} size={30} />
           ),
+          headerShown: false,
+          headerTitle: ""
         }}
       />
       <Tab.Screen
