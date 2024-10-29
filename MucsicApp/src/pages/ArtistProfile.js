@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Entypo";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import { ArtistsPopularSongs } from "../components/ArtistsPopularSongs";
+import { ArtistsAlbums } from "../components/ArtistsAlbums";
 
 export default function ArtistProfile({ route }) {
     const { artist } = route.params;
@@ -55,13 +56,26 @@ export default function ArtistProfile({ route }) {
                 renderItem={({ item }) => <ArtistsPopularSongs data={[item]} artist={artist} />}
 
                 ListFooterComponent={() => (
-                    <View style={{ padding: 20 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>About</Text>
-                        <Text style={{ fontSize: 13, marginTop: 10, fontWeight: '300' }}>
-                            {artist.description}
-                        </Text>
-                       <Text>Kiet test</Text>
+                    <View style={{}}>
+                        <View style={{marginLeft: 20}}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Albums</Text>
+                            <ArtistsAlbums data={artist.albums} artist={artist}/>
+                        </View>
+                        <View  style={{marginLeft: 20, marginRight: 20}}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>About</Text>
+                            <Text style={{ fontSize: 13, marginTop: 10, fontWeight: '300' }}>
+                                {artist.description}
+                            </Text>
+                            <TouchableOpacity style={{marginLeft: '40%', marginTop: 20}}>
+                                <Text style={{color: '#009ae5'}}>View more</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{marginLeft: 20, marginTop: 30}}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Fans also like</Text>
+                            <ArtistsAlbums data={artist.albums} artist={artist}/>
+                        </View>
                     </View>
+                    
                 )}
             />
         </SafeAreaView>
