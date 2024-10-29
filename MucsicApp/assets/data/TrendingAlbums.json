@@ -5,8 +5,7 @@
     "name": "Phương Tuấn",
     "followers": "6.12M",
     "description": "Jack – J97 bắt đầu được biết đến khi hoạt động trong nhóm nhạc G5R và phát hành bài hát Hồng nhan. Trong suốt sự nghiệp của mình, anh đã nhận được năm giải Làn Sóng Xanh, một giải Mai Vàng, một giải WeChoice Awards và bốn giải Zing Music Awards. Ngoài ra, anh còn được trao giải thưởng Nghệ sĩ Châu Á mới xuất sắc nhất tại Việt Nam ở lễ trao giải Mnet Asian Music Awards 2019, giành chiến thắng ở hạng mục Video âm nhạc hay nhất tại giải thưởng Truyền hình châu Á 2020 và cũng chiến thắng giải Nghệ sĩ Đông Nam Á xuất sắc nhất tại MTV EMA 2020.",
-    "populars":
-        [
+    "populars": [
             {"title": "Hoa Hải Đường",
             "image": "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/a/8/6/2/a8626a5671f5a01250a074c4c8140cae.jpg",
             "views": "218M",
@@ -32,7 +31,18 @@
             "views": "28M",
             "time": "5:08"
             }
-        ]
+        ],
+    "albums": [
+        {"image": "https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2019/11/04/jack-k-icm-2.jpg",
+        "title": "K-ICM"
+        },
+        {"image": "https://cdn.tuoitre.vn/471584752817336320/2023/1/4/edit-mono-167221959995172759248-16728293467701776886830.png",
+        "title": "Monoo"
+        },
+        {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
+        "title": "Hương Ly"
+        }
+    ]
     },
     {"id": 2,
     "image": "https://cdn-media.sforum.vn/storage/app/media/Van%20Pham/1/top-ca-si-viet-nam-1.jpg",
@@ -66,6 +76,17 @@
             "image": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2019/7/1/741911/Hay-Trao-Cho-Anh.jpg",
             "views": "289M",
             "time": "4:23"
+            }
+        ],
+        "albums": [
+            {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
+            "title": "Hương Ly"
+            },
+            {"image": "https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2019/11/04/jack-k-icm-2.jpg",
+            "title": "K-ICM"
+            },
+            {"image": "https://cdn.tuoitre.vn/471584752817336320/2023/1/4/edit-mono-167221959995172759248-16728293467701776886830.png",
+            "title": "Monoo"
             }
         ]
     },
@@ -102,6 +123,17 @@
             "views": "7M",
             "time": "4:13"
             }
+        ],
+        "albums": [
+            {"image": "https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2019/11/04/jack-k-icm-2.jpg",
+            "title": "K-ICM"
+            },
+            {"image": "https://cdn.tuoitre.vn/471584752817336320/2023/1/4/edit-mono-167221959995172759248-16728293467701776886830.png",
+            "title": "Monoo"
+            },
+            {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
+            "title": "Hương Ly"
+            }
         ]
     },
     {"id": 4,
@@ -137,6 +169,17 @@
             "views": "39M",
             "time": "4:56"
             }
+        ],
+        "albums": [
+            {"image": "https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2019/11/04/jack-k-icm-2.jpg",
+            "title": "K-ICM"
+            },
+            {"image": "https://cdn.tuoitre.vn/471584752817336320/2023/1/4/edit-mono-167221959995172759248-16728293467701776886830.png",
+            "title": "Monoo"
+            },
+            {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
+            "title": "Hương Ly"
+            }
         ]
     },
     {"id": 5,
@@ -163,5 +206,17 @@
             "time": "3:55"
             }
         ]
+        ,
+    "albums": [
+        {"image": "https://cdn.tuoitre.vn/471584752817336320/2023/1/4/edit-mono-167221959995172759248-16728293467701776886830.png",
+        "title": "Monoo"
+        },
+        {"image": "https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2019/11/04/jack-k-icm-2.jpg",
+        "title": "K-ICM"
+        },
+        {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
+        "title": "Hương Ly"
+        }
+    ]
     }
 ]
