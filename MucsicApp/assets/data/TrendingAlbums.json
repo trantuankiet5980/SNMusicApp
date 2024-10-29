@@ -79,11 +79,11 @@
             }
         ],
         "albums": [
-            {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
-            "title": "Hương Ly"
-            },
             {"image": "https://nguoiduatin.mediacdn.vn/media/dinh-lac-thanh/2019/11/04/jack-k-icm-2.jpg",
             "title": "K-ICM"
+            },
+            {"image": "https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2020/07/16/nguyenhuongly-1594866134215.jpg",
+            "title": "Hương Ly"
             },
             {"image": "https://cdn.tuoitre.vn/471584752817336320/2023/1/4/edit-mono-167221959995172759248-16728293467701776886830.png",
             "title": "Monoo"
