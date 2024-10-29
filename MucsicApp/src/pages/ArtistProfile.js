@@ -60,7 +60,6 @@ export default function ArtistProfile({ route }) {
                         <Text style={{ fontSize: 13, marginTop: 10, fontWeight: '300' }}>
                             {artist.description}
                         </Text>
-                       <Text>Kiet test</Text>
                     </View>
                 )}
             />
