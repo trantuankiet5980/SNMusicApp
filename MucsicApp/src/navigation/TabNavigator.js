@@ -123,6 +123,19 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cordova" color={color} size={30} />
           ),
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerRight: () => (
+            <TouchableOpacity>
+            <IconEntypo
+              name="radio"
+              size={30}
+              color="#000"
+              style={{ marginRight: 20 }}
+            />
+          </TouchableOpacity>
+          )
         }}
       />
       <Tab.Screen
