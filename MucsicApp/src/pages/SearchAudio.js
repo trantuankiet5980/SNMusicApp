@@ -13,84 +13,106 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import playList from "../../assets/data/PlayList.json";
 import trendingAlbums from "../../assets/data/TrendingAlbums.json";
 
+const ListItem = ({ item }) => (
+  <View
+    style={{
+      padding: 10,
+      flexDirection: "row",
+      alignItems: "center", 
+      justifyContent: "space-between",
+    }}
+  >
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Image
+        style={{
+          width: 100,
+          height: 100,
+          borderRadius: item.category === "artists" ? 50 : 10,
+        }}
+        source={{ uri: item.image }}
+      />
+      <View style={{ marginLeft: 10 }}>
+        <Text
+          style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10 }}
+        >
+          {item.title}
+        </Text>
+        <Text style={{ fontSize: 14, color: "#666", marginBottom: 10 }}>
+          {item.name}
+        </Text>
+        {item.category === "album" ? null : item.category === "tracks" ||
+          item.category === "popular" ? (
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <IconEntypo name="controller-play" size={20} color="#b9bcc1" />
+            <Text style={{ color: "#666" }}>{item.views}</Text>
+            <IconEntypo name="dot-single" size={25} color="#b9bcc1" />
+            <Text style={{ color: "#666" }}>{item.time}</Text>
+          </View>
+        ) : (
+          <View>
+            <Text style={{ color: "#666" }}>
+              {item.followers} Followers
+            </Text>
+          </View>
+        )}
+      </View>
+    </View>
+    {item.category === "artists" ? (
+      <TouchableOpacity
+        style={{
+          borderWidth: 0.5,
+          borderRadius: 20,
+          width: 90,
+          height: 40,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ fontWeight: "300" }}>Follow</Text>
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity style={{ marginRight: 10 }}>
+        <IconEntypo
+          name="dots-three-horizontal"
+          size={25}
+          color="#b9bcc1"
+        />
+      </TouchableOpacity>
+    )}
+  </View>
+);
+
 const All = ({ data }) => (
   <FlatList
     data={data}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => (
-      <View
-        style={{
-          padding: 10,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: item.category === "artists" ? 50 : 10,
-            }}
-            source={{ uri: item.image }}
-          />
-          <View style={{ marginLeft: 10 }}>
-            <Text
-              style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10 }}
-            >
-              {item.title}
-            </Text>
-            <Text style={{ fontSize: 14, color: "#666", marginBottom: 10 }}>
-              {item.name}
-            </Text>
-            {item.category === "album" ? null : item.category === "tracks" || // Kiểm tra nếu là album
-              item.category === "popular" ? (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <IconEntypo name="controller-play" size={20} color="#b9bcc1" />
-                <Text style={{ color: "#666" }}>{item.views}</Text>
-                <IconEntypo name="dot-single" size={25} color="#b9bcc1" />
-                <Text style={{ color: "#666" }}>{item.time}</Text>
-              </View>
-            ) : (
-              <View>
-                <Text style={{ color: "#666" }}>
-                  {item.followers} Followers
-                </Text>
-              </View>
-            )}
-          </View>
-        </View>
-        {item.category === "artists" ? (
-          <TouchableOpacity
-            style={{
-              borderWidth: 0.5,
-              borderRadius: 20,
-              width: 90,
-              height: 40,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontWeight: "300" }}>Follow</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity style={{ marginRight: 10 }}>
-            <IconEntypo
-              name="dots-three-horizontal"
-              size={25}
-              color="#b9bcc1"
-            />
-          </TouchableOpacity>
-        )}
-      </View>
-    )}
+    renderItem={({ item }) => <ListItem item={item} />}
   />
 );
 
-const Tracks = () => <View style={{ flex: 1, backgroundColor: "red" }} />;
-const Albums = () => <View style={{ flex: 1, backgroundColor: "yellow" }} />;
-const Artists = () => <View style={{ flex: 1, backgroundColor: "#673ab7" }} />;
+const Tracks = ({ data }) => (
+  <FlatList
+    data={data.filter(item => item.category === "tracks" || item.category === "popular")}
+    keyExtractor={(item, index) => `${item.id}-${index}`}
+    renderItem={({ item }) => <ListItem item={item} />}
+  />
+);
+
+const Albums = ({ data }) => (
+  <FlatList
+    data={data.filter(item => item.category === "album")}
+    keyExtractor={(item, index) => `${item.id}-${index}`}
+    renderItem={({ item }) => <ListItem item={item} />}
+  />
+);
+
+const Artists = ({ data }) => (
+  <FlatList
+    data={data.filter(item => item.category === "artists")}
+    keyExtractor={(item, index) => `${item.id}-${index}`}
+    renderItem={({ item }) => <ListItem item={item} />}
+  />
+);
 
 const normalizeData = () => {
   const normalizedPlayList = playList.map((item) => ({
@@ -165,11 +187,11 @@ export default function SearchAudio() {
       case "all":
         return <All data={data} />;
       case "tracks":
-        return <Tracks />;
+        return <Tracks data={data} />;
       case "albums":
-        return <Albums />;
+        return <Albums data={data} />;
       case "artists":
-        return <Artists />;
+        return <Artists data={data} />;
       default:
         return null;
     }
