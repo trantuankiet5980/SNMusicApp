@@ -13,7 +13,7 @@ export default function LaunchScreen({navigation}) {
             <TouchableOpacity onPress={() => navigation.navigate('LaunchScreenPremium')} style={{backgroundColor: '#000', width: '90%', alignItems: 'center', padding: 10, borderRadius: 30, marginTop: 100}}>
                 <Text style={{color: '#fff', fontSize: 20}}>Create an account</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor: '#fff', width: '90%', alignItems: 'center', padding: 10, borderRadius: 30, marginTop: 20}}>
+            <TouchableOpacity onPress={() => navigation.navigate('SubcritionPlans')} style={{backgroundColor: '#fff', width: '90%', alignItems: 'center', padding: 10, borderRadius: 30, marginTop: 20}}>
                 <Text style={{color: '#21a2fb', fontSize: 20}}>I already have an account</Text>
             </TouchableOpacity>
         </SafeAreaView>
