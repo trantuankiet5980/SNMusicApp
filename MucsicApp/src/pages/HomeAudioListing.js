@@ -57,7 +57,7 @@ export default function HomeAudioListing({navigation}) {
                         </TouchableOpacity>
                     </View>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <TouchableOpacity onPress={() => navigation.navigate('PlayListDetailsAudio', {imageSource: require('../../assets/Home - Audio Listing/Container 31.png'), name: 'Top 50 - Canada'})}>
+                        <TouchableOpacity onPress={() => navigation.navigate('PlayListDetailsAudio', {imageSource: require('../../assets/Home - Audio Listing/Container 31.png'), name: 'Top 50 - Việt Nam'})}>
                             <View style={{width: 150}}>
                                 <Image source={require('../../assets/Home - Audio Listing/Container 31.png')} />
                                 <Text style={{fontSize: 15, fontWeight: '200'}}>Daily chart-toppers update</Text>

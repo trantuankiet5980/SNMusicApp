@@ -9,39 +9,30 @@ import { Audio } from 'expo-av';
 export default function PlayAnAudio({navigation, route }) {
     const { mucsicSelected, sound } = route.params;
     const slideAnim = useRef(new Animated.Value(0)).current;
-    // const [sound, setSound] = useState(null);
     const [isPlaying, setIsPlaying] = useState(true);
   
-   useEffect(() => {
-        // Animation khi mở component
+    useEffect(() => {
+        // Animation when opening component
         Animated.timing(slideAnim, {
             toValue: 1,
             duration: 300,
             useNativeDriver: true,
         }).start();
 
-        return () => {
-            // Unload âm thanh khi component bị unmount
-            if (sound) {
-                // sound.stopAsync();
-                // sound.unloadAsync();
-                sound.pauseAsync();
-            }
-        };
+        // Don't stop sound on unmount since we want it to keep playing
+        return () => {};
     }, []);
+
     const handlePlayPause = async () => {
         if (isPlaying) {
-            // Nếu nhạc đang phát, tạm dừng nhạc
             await sound.pauseAsync();
         } else {
-            // Nếu nhạc đang dừng, phát lại nhạc
             await sound.playAsync();
         }
-        setIsPlaying(!isPlaying); // Cập nhật trạng thái isPlaying
+        setIsPlaying(!isPlaying);
     };
 
     const handleClose = () => {
-        // Animation khi đóng component
         Animated.timing(slideAnim, {
             toValue: 0,
             duration: 300,
