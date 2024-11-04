@@ -13,104 +13,120 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import playList from "../../assets/data/PlayList.json";
 import trendingAlbums from "../../assets/data/TrendingAlbums.json";
 
-const ListItem = ({ item }) => (
-  <View
-    style={{
-      padding: 10,
-      flexDirection: "row",
-      alignItems: "center", 
-      justifyContent: "space-between",
+const ListItem = ({ item, navigation }) => (
+  <TouchableOpacity
+    onPress={() => {
+      if (item.category === "artists" || item.category === "popular" || item.category === "album") {
+        // Find the parent artist data from trendingAlbums
+        const artistData = trendingAlbums.find(artist => 
+          artist.name === item.name || 
+          artist.populars?.some(p => p.title === item.title) ||
+          artist.albums?.some(a => a.title === item.title)
+        );
+        if (artistData) {
+          navigation.navigate('ArtistProfile', { artist: artistData });
+        }
+      }
     }}
   >
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Image
-        style={{
-          width: 100,
-          height: 100,
-          borderRadius: item.category === "artists" ? 50 : 10,
-        }}
-        source={{ uri: item.image }}
-      />
-      <View style={{ marginLeft: 10 }}>
-        <Text
-          style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10 }}
-        >
-          {item.title}
-        </Text>
-        <Text style={{ fontSize: 14, color: "#666", marginBottom: 10 }}>
-          {item.name}
-        </Text>
-        {item.category === "album" ? null : item.category === "tracks" ||
-          item.category === "popular" ? (
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <IconEntypo name="controller-play" size={20} color="#b9bcc1" />
-            <Text style={{ color: "#666" }}>{item.views}</Text>
-            <IconEntypo name="dot-single" size={25} color="#b9bcc1" />
-            <Text style={{ color: "#666" }}>{item.time}</Text>
-          </View>
-        ) : (
-          <View>
-            <Text style={{ color: "#666" }}>
-              {item.followers} Followers
-            </Text>
-          </View>
-        )}
-      </View>
-    </View>
-    {item.category === "artists" ? (
-      <TouchableOpacity
-        style={{
-          borderWidth: 0.5,
-          borderRadius: 20,
-          width: 90,
-          height: 40,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ fontWeight: "300" }}>Follow</Text>
-      </TouchableOpacity>
-    ) : (
-      <TouchableOpacity style={{ marginRight: 10 }}>
-        <IconEntypo
-          name="dots-three-horizontal"
-          size={25}
-          color="#b9bcc1"
+    <View
+      style={{
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Image
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: item.category === "artists" ? 50 : 10,
+          }}
+          source={{ uri: item.image }}
         />
-      </TouchableOpacity>
-    )}
-  </View>
+        <View style={{ marginLeft: 10 }}>
+          <Text
+            style={{ fontSize: 16, fontWeight: "bold", marginBottom: 10 }}
+          >
+            {item.title}
+          </Text>
+          <Text style={{ fontSize: 14, color: "#666", marginBottom: 10 }}>
+            {item.name}
+          </Text>
+          {item.category === "album" ? null : item.category === "tracks" ||
+            item.category === "popular" ? (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <IconEntypo name="controller-play" size={20} color="#b9bcc1" />
+              <Text style={{ color: "#666" }}>{item.views}</Text>
+              <IconEntypo name="dot-single" size={25} color="#b9bcc1" />
+              <Text style={{ color: "#666" }}>{item.time}</Text>
+            </View>
+          ) : (
+            <View>
+              <Text style={{ color: "#666" }}>
+                {item.followers} Followers
+              </Text>
+            </View>
+          )}
+        </View>
+      </View>
+      {item.category === "artists" ? (
+        <TouchableOpacity
+          style={{
+            borderWidth: 0.5,
+            borderRadius: 20,
+            width: 90,
+            height: 40,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ fontWeight: "300" }}>Follow</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={{ marginRight: 10 }}>
+          <IconEntypo
+            name="dots-three-horizontal"
+            size={25}
+            color="#b9bcc1"
+          />
+        </TouchableOpacity>
+      )}
+    </View>
+  </TouchableOpacity>
 );
 
-const All = ({ data }) => (
+const All = ({ data, navigation }) => (
   <FlatList
     data={data}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
   />
 );
 
-const Tracks = ({ data }) => (
+const Tracks = ({ data, navigation }) => (
   <FlatList
     data={data.filter(item => item.category === "tracks" || item.category === "popular")}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
   />
 );
 
-const Albums = ({ data }) => (
+const Albums = ({ data, navigation }) => (
   <FlatList
     data={data.filter(item => item.category === "album")}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
   />
 );
 
-const Artists = ({ data }) => (
+const Artists = ({ data, navigation }) => (
   <FlatList
     data={data.filter(item => item.category === "artists")}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
   />
 );
 
@@ -166,7 +182,7 @@ const normalizeData = () => {
   return [...normalizedPlayList, ...normalizedTrendingAlbums];
 };
 
-export default function SearchAudio() {
+export default function SearchAudio({ navigation }) {
   const [isFocused, setIsFocused] = useState(false);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -176,22 +192,33 @@ export default function SearchAudio() {
     { key: "artists", title: "Artists" },
   ]);
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const combinedData = normalizeData();
     setData(combinedData);
+    setFilteredData(combinedData);
   }, []);
+
+  useEffect(() => {
+    const filtered = data.filter(item => 
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filtered);
+  }, [searchQuery]);
 
   const renderScene = ({ route }) => {
     switch (route.key) {
       case "all":
-        return <All data={data} />;
+        return <All data={filteredData} navigation={navigation} />;
       case "tracks":
-        return <Tracks data={data} />;
+        return <Tracks data={filteredData} navigation={navigation} />;
       case "albums":
-        return <Albums data={data} />;
+        return <Albums data={filteredData} navigation={navigation} />;
       case "artists":
-        return <Artists data={data} />;
+        return <Artists data={filteredData} navigation={navigation} />;
       default:
         return null;
     }
@@ -232,6 +259,8 @@ export default function SearchAudio() {
           onBlur={() => setIsFocused(false)}
           style={{ width: "80%", height: 40, marginLeft: 20 }}
           placeholder="Search"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
         />
         <IconEntypo
           style={{ marginRight: 20 }}
