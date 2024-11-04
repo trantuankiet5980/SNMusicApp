@@ -139,12 +139,17 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Library"
+        name="Your Library"
         component={MyLibrary}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="book" color={color} size={30} />
           ),
+          headerRight: () => (
+            <TouchableOpacity style={{ marginRight: 20 }}>
+              <Icon name="search" size={30} />
+            </TouchableOpacity>
+          )
         }}
       />
     </Tab.Navigator>
