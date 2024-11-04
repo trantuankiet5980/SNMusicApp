@@ -24,7 +24,7 @@ const HomeStackScreen = () => (
       options={({ navigation }) => ({
         headerTitle: "",
         headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("LaunchScreen")}>
+          <TouchableOpacity onPress={() => navigation.navigate("LaunchScreenPremium")}>
             <Image
               style={{ marginLeft: 20 }}
               source={require("../../assets/Home - Audio Listing/Image 36.png")}
