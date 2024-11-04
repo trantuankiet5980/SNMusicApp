@@ -5,8 +5,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {TrendingAlbumList} from '../components/TrendingAlbumList';
 import { PopularArtistsList } from '../components/PopularArtistsList';
 
-export default function HomeAudioListing({navigation}) {
+export default function HomeAudioListing({navigation, route}) {
+    console.log('Route params:', route.params); // Debug log
     const [greeting, setGreeting] = useState('');
+    const username = route.params?.username || "Guest";
 
     useEffect(() => {
         const updateGreeting = () => {
@@ -32,7 +34,7 @@ export default function HomeAudioListing({navigation}) {
             <ScrollView>
                 <View style={{marginLeft: 25, marginRight: 20}}>
                     <Text style={{fontSize: 18, fontWeight: '200'}}>{greeting},</Text>
-                    <Text style={{fontSize: 25,fontWeight: 'bold'}}>Tran Tuan Kiet</Text>
+                    <Text style={{fontSize: 25,fontWeight: 'bold'}}>{username}</Text>
                     <View style={{flexDirection: 'row', borderWidth: 0.3, marginTop: 15, alignItems: 'center', borderRadius: 30}}>
                         <Icon name="search" size={20} color="#000" style={{padding: 12}} />
                         <TextInput placeholder="What you want to listen to" style={{fontSize: 17, fontWeight: '200'}} />

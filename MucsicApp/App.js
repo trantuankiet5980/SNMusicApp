@@ -28,6 +28,7 @@ export default function App() {
           component={LaunchScreenPremium}
           options={{ headerShown: false }}
         />
+        
         <Stack.Screen
           name="SubcritionPlans"
           component={SubcritionPlans}

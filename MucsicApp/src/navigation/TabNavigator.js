@@ -75,6 +75,7 @@ const HomeStackScreen = () => (
         headerShadowVisible: false,
       }}
     />
+   
   </HomeStack.Navigator>
 );
 
