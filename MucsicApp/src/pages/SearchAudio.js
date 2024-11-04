@@ -8,15 +8,20 @@ import {
   TouchableOpacity,
 } from "react-native";
 import IconEntypo from "react-native-vector-icons/Entypo";
+import IconFeather from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { Audio } from 'expo-av';
 import playList from "../../assets/data/PlayList.json";
 import trendingAlbums from "../../assets/data/TrendingAlbums.json";
+import { audioMapping } from '../../assets/mucsic/AudioMapping';
 
-const ListItem = ({ item, navigation }) => (
+const ListItem = ({ item, navigation, onTrackPress }) => (
   <TouchableOpacity
     onPress={() => {
-      if (item.category === "artists" || item.category === "popular" || item.category === "album") {
+      if (item.category === "tracks" || item.category === "popular") {
+        onTrackPress(item);
+      } else if (item.category === "artists" || item.category === "album") {
         // Find the parent artist data from trendingAlbums
         const artistData = trendingAlbums.find(artist => 
           artist.name === item.name || 
@@ -98,35 +103,35 @@ const ListItem = ({ item, navigation }) => (
   </TouchableOpacity>
 );
 
-const All = ({ data, navigation }) => (
+const All = ({ data, navigation, onTrackPress }) => (
   <FlatList
     data={data}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} onTrackPress={onTrackPress} />}
   />
 );
 
-const Tracks = ({ data, navigation }) => (
+const Tracks = ({ data, navigation, onTrackPress }) => (
   <FlatList
     data={data.filter(item => item.category === "tracks" || item.category === "popular")}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} onTrackPress={onTrackPress} />}
   />
 );
 
-const Albums = ({ data, navigation }) => (
+const Albums = ({ data, navigation, onTrackPress }) => (
   <FlatList
     data={data.filter(item => item.category === "album")}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} onTrackPress={onTrackPress} />}
   />
 );
 
-const Artists = ({ data, navigation }) => (
+const Artists = ({ data, navigation, onTrackPress }) => (
   <FlatList
     data={data.filter(item => item.category === "artists")}
     keyExtractor={(item, index) => `${item.id}-${index}`}
-    renderItem={({ item }) => <ListItem item={item} navigation={navigation} />}
+    renderItem={({ item }) => <ListItem item={item} navigation={navigation} onTrackPress={onTrackPress} />}
   />
 );
 
@@ -140,6 +145,7 @@ const normalizeData = () => {
     time: item.time,
     followers: null,
     category: "tracks",
+    url: item.url
   }));
 
   const normalizedTrendingAlbums = trendingAlbums.flatMap((item) => {
@@ -194,7 +200,12 @@ export default function SearchAudio({ navigation }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [sound, setSound] = useState();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // Load initial data
   useEffect(() => {
     const combinedData = normalizeData();
     setData(combinedData);
@@ -202,23 +213,105 @@ export default function SearchAudio({ navigation }) {
   }, []);
 
   useEffect(() => {
-    const filtered = data.filter(item => 
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredData(filtered);
-  }, [searchQuery]);
+    const setupAudio = async () => {
+      try {
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: true,
+          shouldDuckAndroid: true,
+          playThroughEarpieceAndroid: false
+        });
+      } catch (error) {
+        console.error("Error setting up audio:", error);
+      }
+    };
+
+    setupAudio();
+
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, []);
+
+  // Filter data when search query changes
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredData(data);
+    } else {
+      const filtered = data.filter(item => 
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+  }, [searchQuery, data]);
+
+  const playSound = async (audioSource) => {
+    try {
+      setIsLoading(true);
+      
+      if (sound) {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      }
+
+      const soundObject = new Audio.Sound();
+      const audioPath = audioMapping[audioSource];
+      
+      await soundObject.loadAsync(audioPath);
+      setSound(soundObject);
+      
+      await soundObject.playAsync();
+      setIsPlaying(true);
+      setIsLoading(false);
+
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Error playing sound:", error);
+    }
+  };
+
+  const handlePausePress = async () => {
+    if (sound && !isLoading) {
+      try {
+        await sound.pauseAsync();
+        setIsPlaying(false);
+      } catch (error) {
+        console.error("Error pausing sound:", error);
+      }
+    }
+  };
+
+  const handlePlayPress = async () => {
+    if (sound && !isLoading) {
+      try {
+        await sound.playAsync();
+        setIsPlaying(true);
+      } catch (error) {
+        console.error("Error resuming sound:", error);
+      }
+    }
+  };
+
+  const handleTrackPress = (item) => {
+    if (!item || isLoading) return;
+    setSelectedItem(item);
+    playSound(item.url);
+  };
 
   const renderScene = ({ route }) => {
     switch (route.key) {
       case "all":
-        return <All data={filteredData} navigation={navigation} />;
+        return <All data={filteredData} navigation={navigation} onTrackPress={handleTrackPress} />;
       case "tracks":
-        return <Tracks data={filteredData} navigation={navigation} />;
+        return <Tracks data={filteredData} navigation={navigation} onTrackPress={handleTrackPress} />;
       case "albums":
-        return <Albums data={filteredData} navigation={navigation} />;
+        return <Albums data={filteredData} navigation={navigation} onTrackPress={handleTrackPress} />;
       case "artists":
-        return <Artists data={filteredData} navigation={navigation} />;
+        return <Artists data={filteredData} navigation={navigation} onTrackPress={handleTrackPress} />;
       default:
         return null;
     }
@@ -276,6 +369,34 @@ export default function SearchAudio({ navigation }) {
         onIndexChange={setIndex}
         initialLayout={{}}
       />
+      {selectedItem && (
+        <View style={{ backgroundColor: 'black', height: 80, marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <TouchableOpacity onPress={() => navigation.navigate('PlayAnAudio', {mucsicSelected: selectedItem, sound})} style={{ flexDirection: 'row' }}>
+            <Image source={{ uri: selectedItem.image }} style={{ width: 50, height: 50, marginRight: 20, marginLeft: 20, borderRadius: 5 }} />
+            <View>
+              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>{selectedItem.title}</Text>
+              <Text style={{ color: '#fff' }}>{selectedItem.name}</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <IconFeather name="heart" size={25} color="#fff" style={{ marginRight: 20 }} />
+            {isLoading ? (
+              <Text style={{ color: '#fff', marginRight: 20 }}>Loading...</Text>
+            ) : isPlaying ? (
+              <TouchableOpacity onPress={handlePausePress}>
+                <IconFeather name="pause" size={25} color="#fff" style={{ marginRight: 20 }} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={handlePlayPress}>
+                <IconFeather name="play" size={25} color="#fff" style={{ marginRight: 20 }} />
+              </TouchableOpacity>
+            )}
+          </View>
+          <TouchableOpacity onPress={() => setSelectedItem(null)} style={{ marginRight: 15 }}>
+              <IconFeather name="x" size={25} color="#fff" />
+            </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
