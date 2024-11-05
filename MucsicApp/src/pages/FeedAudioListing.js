@@ -130,7 +130,7 @@ export default function FeedAudioListing({ onItemPress }) {
     return (
         <View style={{backgroundColor:'white'}}>
             <FlatList
-                data={mappedFeed}
+                data={mappedFeed}   
                 contentContainerStyle={{ paddingBottom: 30 }}
                 renderItem={({ item }) => (
                     <FeedAudioItem item={item} onItemPress={onItemPress} />
