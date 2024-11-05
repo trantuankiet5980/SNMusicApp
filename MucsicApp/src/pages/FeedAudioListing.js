@@ -6,12 +6,38 @@ import IconEntypo from "react-native-vector-icons/Entypo";
 
 
 const FeedAudioItem = ({ item, onItemPress }) => {
-    const [count, setCount] = useState(0); // Initialize count state
 
-    // Function to increment count
+    const [count, setCount] = useState(item.interact[0].timInteract || 0);
+
+    // Function to increment the like count
     const incrementCount = () => {
         setCount(count + 1);
     };
+
+    // Function to render replies
+    const renderReply = ({ item: reply }) => (
+        <View style={{ marginLeft: 20, marginTop: 5 }}>
+            <Text style={{ fontSize: 12, fontWeight: '300', color: 'gray' }}>
+                {reply.nameReply || "Anonymous"}: {reply.contentReply || "No  content"}
+            </Text>
+        </View>
+    );
+
+    // Function to render comments
+    const renderComment = ({ item: comment }) => (
+        <View style={{ marginTop: 10 }}>
+            <Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}>
+                {comment.nameInteract}: {comment.contentInteract}
+            </Text>
+            {/* Render Replies */}
+            <FlatList
+                data={comment.reply}
+                renderItem={renderReply}
+                keyExtractor={(reply) => reply.idReply?.toString()}
+                style={{ marginTop: 5 }}
+            />
+        </View>
+    );
     return (
         <View style={{ marginLeft: 20, marginRight: 20, marginTop: 30, flexDirection: 'column', justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row' }}>
@@ -74,38 +100,52 @@ const FeedAudioItem = ({ item, onItemPress }) => {
                     </View>
                 </View>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10,alignItems:'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                    <TouchableOpacity style={{ flexDirection: 'row',marginRight: 20,alignItems:'center' }} onPress={incrementCount}>
-                        <IconEntypo style={{marginRight: 5}} name="heart" size={30} />
+                    {/* Heart Icon with Like Count */}
+                    <TouchableOpacity style={{ flexDirection: 'row', marginRight: 20, alignItems: 'center' }} onPress={incrementCount}>
+                        <IconEntypo style={{ marginRight: 5 }} name="heart" size={30} />
                         <Text style={{
                             fontSize: 13,
-                            fontWeight: '300', color: 'black', fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: 'black'
                         }}>{count}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'row',marginRight: 20,alignItems:'center'}}>
-                        <IconEntypo style={{marginRight: 5}} name="message" size={30} />
+
+                    {/* Message Icon with Comment Count */}
+                    <TouchableOpacity style={{ flexDirection: 'row', marginRight: 20, alignItems: 'center' }}>
+                        <IconEntypo style={{ marginRight: 5 }} name="message" size={30} />
                         <Text style={{
                             fontSize: 13,
-                            fontWeight: '300', color: 'black', fontWeight: 'bold'
-                        }}>{item.time}</Text>
+                            fontWeight: 'bold',
+                            color: 'black'
+                        }}>
+                            {item.interact[0].commentInteract.length}
+                        </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: 'row',marginRight: 20,alignItems:'center'}}>
-                        <IconEntypo style={{marginRight: 5}} name="cycle" size={30} />
+
+                    {/* Cycle Icon with Track Duration */}
+                    <TouchableOpacity style={{ flexDirection: 'row', marginRight: 20, alignItems: 'center' }}>
+                        <IconEntypo style={{ marginRight: 5 }} name="cycle" size={30} />
                         <Text style={{
                             fontSize: 13,
-                            fontWeight: '300', color: 'black', fontWeight: 'bold'
-                        }}>{item.time}</Text>
+                            fontWeight: 'bold',
+                            color: 'black'
+                        }}>
+                            {/* Safely access the number of replies for the first comment */}
+                            {item.interact[0]?.commentInteract[0]?.reply?.length || 0}
+                        </Text>
                     </TouchableOpacity>
+
                 </View>
 
-                <TouchableOpacity style={{ flexDirection: 'row',marginRight: 10 }}>
+                {/* Dots Icon */}
+                <TouchableOpacity style={{ flexDirection: 'row', marginRight: 10 }}>
                     <IconEntypo name="dots-three-horizontal" size={20} />
-
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </View >
     );
 }
 
