@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { Audio } from "expo-av";
 import Feed from "../../assets/data/Feed.json";
@@ -6,7 +6,12 @@ import IconEntypo from "react-native-vector-icons/Entypo";
 
 
 const FeedAudioItem = ({ item, onItemPress }) => {
+    const [count, setCount] = useState(0); // Initialize count state
 
+    // Function to increment count
+    const incrementCount = () => {
+        setCount(count + 1);
+    };
     return (
         <View style={{ marginLeft: 20, marginRight: 20, marginTop: 30, flexDirection: 'column', justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row' }}>
@@ -15,12 +20,13 @@ const FeedAudioItem = ({ item, onItemPress }) => {
                 </TouchableOpacity>
                 <View style={{ marginLeft: 10 }}>
                     <TouchableOpacity>
-                        <Text style={{ color: 'black', fontSize: 16 }}>{item.artist}</Text>
+                        <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold' }}>{item.artist}</Text>
                     </TouchableOpacity>
 
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ color: 'black', fontSize: 12, marginRight: 10 }}>{item.posted}</Text>
-                        <Text style={{ color: 'black', fontSize: 12 }}>{item.timePost}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 14, marginRight: 10 }}>{item.posted}</Text>
+                        <IconEntypo style={{ color: '#9095a0' }} name="dot-single" size={22} />
+                        <Text style={{ color: '#9095a0', fontSize: 14 }}>{item.timePost}</Text>
                     </View>
                 </View>
             </View>
@@ -68,6 +74,37 @@ const FeedAudioItem = ({ item, onItemPress }) => {
                     </View>
                 </View>
             </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10,alignItems:'center' }}>
+                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <TouchableOpacity style={{ flexDirection: 'row',marginRight: 20,alignItems:'center' }} onPress={incrementCount}>
+                        <IconEntypo style={{marginRight: 5}} name="heart" size={30} />
+                        <Text style={{
+                            fontSize: 13,
+                            fontWeight: '300', color: 'black', fontWeight: 'bold'
+                        }}>{count}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ flexDirection: 'row',marginRight: 20,alignItems:'center'}}>
+                        <IconEntypo style={{marginRight: 5}} name="message" size={30} />
+                        <Text style={{
+                            fontSize: 13,
+                            fontWeight: '300', color: 'black', fontWeight: 'bold'
+                        }}>{item.time}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ flexDirection: 'row',marginRight: 20,alignItems:'center'}}>
+                        <IconEntypo style={{marginRight: 5}} name="cycle" size={30} />
+                        <Text style={{
+                            fontSize: 13,
+                            fontWeight: '300', color: 'black', fontWeight: 'bold'
+                        }}>{item.time}</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity style={{ flexDirection: 'row',marginRight: 10 }}>
+                    <IconEntypo name="dots-three-horizontal" size={20} />
+
+                </TouchableOpacity>
+            </View>
+
         </View>
     );
 }
