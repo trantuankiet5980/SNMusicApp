@@ -16,10 +16,10 @@
         "commentInteract": [
           {
             "nameInteract": "Sally Rooney",
-            "imageInteract": "../Feed - Audio Listing/Avatar 4.png",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
             "contentInteract": "Do duis cul",
             "timeInteract": "17h",
-            "likeInteract": "1 like",
+            "likeInteract": 1,
             "reply": [
               {
                 "idReply": 1,
@@ -35,18 +35,18 @@
           {
             "idInteract": 2,
             "nameInteract": "Jason",
-            "imageInteract": "../Feed - Audio Listing/Avatar 5.png",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxPeUDB133aJoZXik3FwT4t18g2WRx_U-8_Q&s",
             "contentInteract": "Minim magna exc",
             "timeInteract": "48m",
-            "likeInteract": "2 like",
+            "likeInteract": 2,
             "reply": [
               {
                 "idReply": 2,
                 "nameReply": "Liam Pham",
-                "imageReply": "../Feed - Comment on an Audio/Avatar 11.png",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
                 "contentReply": "Deserunt officia consetetur adiqpi",
                 "timeReply": "40m",
-                "likeReply": "2 like"
+                "likeReply": 2
               },
               {}
             ]
@@ -54,18 +54,18 @@
           {
             "idInteract": 3,
             "nameInteract": "Liam Pham",
-            "imageInteract": "../Feed - Comment on an Audio/Avatar 11.png",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
             "contentInteract": "Commodo",
             "timeInteract": "48m",
-            "likeInteract": "1 like",
+            "likeInteract": 1,
             "reply": [
               {
                 "idReply": 3,
                 "nameReply": "Sally Rooney",
-                "imageReply": "../Feed - Audio Listing/Avatar 4.png",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
                 "contentReply": "Esse consequat cillum ex",
                 "timeReply": "40m",
-                "likeReply": "2 like"
+                "likeReply": 2
               },
               {}
             ]
@@ -87,14 +87,14 @@
     "interact": [
       {
         "idInteract": 1,
-        "timInteract": 20,
+        "timInteract": 50,
         "commentInteract": [
           {
             "nameInteract": "Sally Rooney",
-            "imageInteract": "../Feed - Audio Listing/Avatar 4.png",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
             "contentInteract": "Do duis cul",
             "timeInteract": "17h",
-            "likeInteract": "1 like",
+            "likeInteract": 1,
             "reply": [
               {
                 "idReply": 1,
@@ -110,18 +110,18 @@
           {
             "idInteract": 2,
             "nameInteract": "Jason",
-            "imageInteract": "../Feed - Audio Listing/Avatar 5.png",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxPeUDB133aJoZXik3FwT4t18g2WRx_U-8_Q&s",
             "contentInteract": "Minim magna exc",
             "timeInteract": "48m",
-            "likeInteract": "2 like",
+            "likeInteract": 2,
             "reply": [
               {
                 "idReply": 2,
                 "nameReply": "Liam Pham",
-                "imageReply": "../Feed - Comment on an Audio/Avatar 11.png",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
                 "contentReply": "Deserunt officia consetetur adiqpi",
                 "timeReply": "40m",
-                "likeReply": "2 like"
+                "likeReply":4
               },
               {}
             ]
@@ -129,18 +129,168 @@
           {
             "idInteract": 3,
             "nameInteract": "Liam Pham",
-            "imageInteract": "../Feed - Comment on an Audio/Avatar 11.png",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
             "contentInteract": "Commodo",
             "timeInteract": "48m",
-            "likeInteract": "1 like",
+            "likeInteract":4,
             "reply": [
               {
                 "idReply": 3,
                 "nameReply": "Sally Rooney",
-                "imageReply": "../Feed - Audio Listing/Avatar 4.png",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
                 "contentReply": "Esse consequat cillum ex",
                 "timeReply": "40m",
-                "likeReply": "2 like"
+                "likeReply": 2
+              },
+              {}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "url": "EmXinh.mp3",
+    "title": "Em Xinh",
+    "artist": "MONO",
+    "artwork": "https://media.moitruongvadothi.vn/thumb_x600x/images/2023/12/27/9876-1703616833-1111.jpg",
+    "views": "93M",
+    "time": "3:17",
+    "posted": "Posted a track",
+    "timePost": "3d",
+    "interact": [
+      {
+        "idInteract": 1,
+        "timInteract": 40,
+        "commentInteract": [
+          {
+            "nameInteract": "Sally Rooney",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
+            "contentInteract": "Do duis cul",
+            "timeInteract": "17h",
+            "likeInteract": 4,
+            "reply": [
+              {
+                "idReply": 1,
+                "nameReply": "",
+                "imageReply": "",
+                "contentReply": "",
+                "timeReply": "",
+                "likeReply": ""
+              },
+              {}
+            ]
+          },
+          {
+            "idInteract": 2,
+            "nameInteract": "Jason",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxPeUDB133aJoZXik3FwT4t18g2WRx_U-8_Q&s",
+            "contentInteract": "Minim magna exc",
+            "timeInteract": "48m",
+            "likeInteract": 3,
+            "reply": [
+              {
+                "idReply": 2,
+                "nameReply": "Liam Pham",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
+                "contentReply": "Deserunt officia consetetur adiqpi",
+                "timeReply": "40m",
+                "likeReply": 2
+              },
+              {}
+            ]
+          },
+          {
+            "idInteract": 3,
+            "nameInteract": "Liam Pham",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
+            "contentInteract": "Commodo",
+            "timeInteract": "48m",
+            "likeInteract": 2,
+            "reply": [
+              {
+                "idReply": 3,
+                "nameReply": "Sally Rooney",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
+                "contentReply": "Esse consequat cillum ex",
+                "timeReply": "40m",
+                "likeReply": 10
+              },
+              {}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "url": "HayTraoChoAnh.mp3",
+    "title": "Hãy Trao Cho Anh",
+    "artist": "Sơn Tùng M-TP",
+    "artwork": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2019/7/1/741911/Hay-Trao-Cho-Anh.jpg",
+    "views": "100M",
+    "time": "4:16",
+    "posted": "Posted a track",
+    "timePost": "3d",
+    "interact": [
+      {
+        "idInteract": 1,
+        "timInteract": 20,
+        "commentInteract": [
+          {
+            "nameInteract": "Sally Rooney",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
+            "contentInteract": "Do duis cul",
+            "timeInteract": "17h",
+            "likeInteract": 10,
+            "reply": [
+              {
+                "idReply": 1,
+                "nameReply": "",
+                "imageReply": "",
+                "contentReply": "",
+                "timeReply": "",
+                "likeReply": ""
+              },
+              {}
+            ]
+          },
+          {
+            "idInteract": 2,
+            "nameInteract": "Jason",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxPeUDB133aJoZXik3FwT4t18g2WRx_U-8_Q&s",
+            "contentInteract": "Minim magna exc",
+            "timeInteract": "48m",
+            "likeInteract": 5,
+            "reply": [
+              {
+                "idReply": 2,
+                "nameReply": "Liam Pham",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
+                "contentReply": "Deserunt officia consetetur adiqpi",
+                "timeReply": "40m",
+                "likeReply": 6
+              },
+              {}
+            ]
+          },
+          {
+            "idInteract": 3,
+            "nameInteract": "Liam Pham",
+            "imageInteract": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6mSrlcA-2QPbV5YLcnHMw6cgHs0sAJzXkog&s",
+            "contentInteract": "Commodo",
+            "timeInteract": "48m",
+            "likeInteract": 7,
+            "reply": [
+              {
+                "idReply": 3,
+                "nameReply": "Sally Rooney",
+                "imageReply": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPA5iWVI65pstaSXnv0S_w2_oqY2kGG2fPCQ&s",
+                "contentReply": "Esse consequat cillum ex",
+                "timeReply": "40m",
+                "likeReply":7
               },
               {}
             ]
