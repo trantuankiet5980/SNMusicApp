@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator, Modal
 import Feed from "../../assets/data/Feed.json";
 import IconEntypo from "react-native-vector-icons/Entypo";
 
+// Component to render individual audio feed item
 const FeedAudioItem = ({ item, onItemPress, likeCounts, loadingLikes, incrementLikeCount, onCommentPress, incrementCommentLike, onReplyPress }) => {
     const likeCount = likeCounts[item.id] || item.interact[0].timInteract || 0;
     const isLoading = loadingLikes[item.id] || false;
@@ -108,6 +109,7 @@ const FeedAudioItem = ({ item, onItemPress, likeCounts, loadingLikes, incrementL
     );
 };
 
+// Modal component to handle displaying comments and replies
 const CommentModal = ({ visible, comments, onClose, incrementCommentLike, onReplyPress, incrementReplyLike }) => {
     const [newReply, setNewReply] = useState('');
     const [replyingToComment, setReplyingToComment] = useState(null);
@@ -180,23 +182,17 @@ const CommentModal = ({ visible, comments, onClose, incrementCommentLike, onRepl
                                                         source={{ uri: reply.imageReply }}
                                                         style={{ width: 20, height: 20, borderRadius: 15, marginRight: 10 }}
                                                     />
-                                                    <Text style={{ fontWeight: 'bold', marginRight: 5 }}>
-                                                        {reply.nameReply}
-                                                    </Text>
+                                                    <Text style={{ fontWeight: 'bold' }}>{reply.nameReply}</Text>
                                                     <Text>{reply.contentReply}</Text>
                                                 </View>
-                                                <View style={{ flexDirection: 'row' }}>
-                                                    {reply.timeReply && (
-                                                        <Text style={{ fontSize: 12, color: 'gray', marginRight: 10 }}>
-                                                            {reply.timeReply}
-                                                        </Text>
-                                                    )}
-                                                    <TouchableOpacity onPress={() => incrementReplyLike(comment.idInteract, reply.idReply)}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                                                    <Text style={{ color: 'gray', fontSize: 12 }}>
+                                                        {reply.timeReply}
+                                                    </Text>
+                                                    <TouchableOpacity onPress={() => incrementReplyLike(reply.idReply)}>
                                                         <IconEntypo name="heart" size={15} color="black" />
                                                     </TouchableOpacity>
-                                                    <Text style={{ fontSize: 12, color: 'black', marginLeft: 5 }}>
-                                                        {reply.likeReply} like
-                                                    </Text>
+                                                    <Text style={{ marginLeft: 5 }}>{reply.likeReply} like</Text>
                                                 </View>
                                             </View>
                                         )
@@ -205,22 +201,21 @@ const CommentModal = ({ visible, comments, onClose, incrementCommentLike, onRepl
                             </View>
                         ))}
                     </ScrollView>
-
-                    {replyingToComment && (
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+                    {/* Reply Input */}
+                    {replyingToComment !== null && (
+                        <View>
                             <TextInput
-                                style={{ borderWidth: 1, borderRadius: 5, flex: 1, padding: 5 }}
-                                placeholder="Write a reply..."
                                 value={newReply}
                                 onChangeText={handleReplyChange}
+                                placeholder="Write a reply..."
+                                style={{ borderColor: '#ccc', borderWidth: 1, padding: 8, borderRadius: 5, marginBottom: 10 }}
                             />
                             <TouchableOpacity onPress={handleReplySubmit}>
-                                <Text style={{ color: 'blue', marginLeft: 10 }}>Send</Text>
+                                <Text style={{ color: 'blue', textAlign: 'right' }}>Submit</Text>
                             </TouchableOpacity>
                         </View>
                     )}
-
-                    <TouchableOpacity onPress={onClose} style={{ marginTop: 20, alignSelf: 'center' }}>
+                    <TouchableOpacity onPress={onClose} style={{ marginTop: 10 }}>
                         <Text style={{ color: 'blue' }}>Close</Text>
                     </TouchableOpacity>
                 </View>
@@ -229,116 +224,104 @@ const CommentModal = ({ visible, comments, onClose, incrementCommentLike, onRepl
     );
 };
 
+// Main Feed Screen Component
 const FeedScreen = () => {
-    const [feedData, setFeedData] = useState(Feed);
-    const [loadingLikes, setLoadingLikes] = useState({});
     const [likeCounts, setLikeCounts] = useState({});
-    const [selectedItemId, setSelectedItemId] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const [loadingLikes, setLoadingLikes] = useState({});
+    const [commentsModalVisible, setCommentsModalVisible] = useState(false);
+    const [currentComments, setCurrentComments] = useState([]);
 
     const incrementLikeCount = (id) => {
-        setLoadingLikes({ ...loadingLikes, [id]: true });
+        if (loadingLikes[id]) return; // Prevent multiple clicks while loading
+        setLoadingLikes((prev) => ({ ...prev, [id]: true }));
+
         setTimeout(() => {
-            setLikeCounts((prevLikes) => ({
-                ...prevLikes,
-                [id]: (prevLikes[id] || 0) + 1
-            }));
-            setLoadingLikes({ ...loadingLikes, [id]: false });
+            setLikeCounts((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+            setLoadingLikes((prev) => ({ ...prev, [id]: false }));
         }, 1000);
     };
 
+    const onCommentPress = (id) => {
+        const selectedPost = Feed.find(item => item.id === id);
+        setCurrentComments(selectedPost?.interact[0].commentInteract || []);
+        setCommentsModalVisible(true);
+    };
+
     const incrementCommentLike = (commentId) => {
-        setFeedData((prevFeed) => {
-            return prevFeed.map((item) => {
-                item.interact[0].commentInteract = item.interact[0].commentInteract.map((comment) => {
-                    if (comment.idInteract === commentId) {
-                        comment.likeInteract = (comment.likeInteract || 0) + 1;
-                    }
-                    return comment;
-                });
-                return item;
-            });
-        });
-    };
-    //haldereplylike
-    const incrementReplyLike = (commentId, replyId) => {
-        setFeedData((prevFeed) => {
-            return prevFeed.map((item) => {
-                item.interact[0].commentInteract = item.interact[0].commentInteract.map((comment) => {
-                    if (comment.idInteract === commentId) {
-                        comment.reply = comment.reply.map((reply) => {
-                            if (reply.idReply === replyId) {
-                                return {
-                                    ...reply,
-                                    likeReply: (reply.likeReply || 0) + 1,
-                                };
-                            }
-                            return reply;
-                        });
-                    }
-                    return comment;
-                });
-                return item;
-            });
-        });
+        setCurrentComments(prevComments =>
+            prevComments.map(comment =>
+                comment.idInteract === commentId
+                    ? { ...comment, likeInteract: comment.likeInteract + 1 }
+                    : comment
+            )
+        );
     };
 
-
-    const handleCommentPress = (id) => {
-        const selectedItem = feedData.find((item) => item.id === id);
-        setSelectedItemId(id);
-        setShowModal(true);
+    const onReplyPress = (commentId, content) => {
+        setCurrentComments(prevComments =>
+            prevComments.map(comment =>
+                comment.idInteract === commentId
+                    ? {
+                          ...comment,
+                          reply: [
+                              ...(comment.reply || []),
+                              {
+                                  idReply: new Date().getTime(),
+                                  contentReply: content,
+                                  timeReply: 'Just now',
+                                  likeReply: 0,
+                                  imageReply: 'https://path_to_reply_image.com',
+                                  nameReply: 'User Name'
+                              }
+                          ]
+                      }
+                    : comment
+            )
+        );
     };
 
-    const handleReplyPress = (commentId, content) => {
-        setFeedData((prevFeed) => {
-            return prevFeed.map((item) => {
-                item.interact[0].commentInteract = item.interact[0].commentInteract.map((comment) => {
-                    if (comment.idInteract === commentId) {
-                        const newReply = {
-                            idReply: Math.random().toString(),
-                            nameReply: "User",
-                            contentReply: content,
-                            imageReply: "../../assets/Feed - Audio Listing/Avatar 4.png",
-                        };
-                        comment.reply = comment.reply ? [...comment.reply, newReply] : [newReply];
-                    }
-                    return comment;
-                });
-                return item;
-            });
-        });
+    const incrementReplyLike = (replyId) => {
+        setCurrentComments(prevComments =>
+            prevComments.map(comment =>
+                comment.reply
+                    ? {
+                          ...comment,
+                          reply: comment.reply.map(reply =>
+                              reply.idReply === replyId
+                                  ? { ...reply, likeReply: reply.likeReply + 1 }
+                                  : reply
+                          )
+                      }
+                    : comment
+            )
+        );
     };
 
     return (
         <View style={{ flex: 1 }}>
             <FlatList
-                data={feedData}
+                data={Feed}
                 renderItem={({ item }) => (
                     <FeedAudioItem
                         item={item}
-                        onItemPress={() => { }}
                         likeCounts={likeCounts}
                         loadingLikes={loadingLikes}
                         incrementLikeCount={incrementLikeCount}
-                        onCommentPress={handleCommentPress}
+                        onCommentPress={onCommentPress}
                         incrementCommentLike={incrementCommentLike}
-                        onReplyPress={handleReplyPress}
+                        onReplyPress={onReplyPress}
                     />
                 )}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.id}
             />
-
             <CommentModal
-                visible={showModal}
-                comments={feedData.find((item) => item.id === selectedItemId)?.interact[0]?.commentInteract || []}
-                onClose={() => setShowModal(false)}
+                visible={commentsModalVisible}
+                comments={currentComments}
+                onClose={() => setCommentsModalVisible(false)}
                 incrementCommentLike={incrementCommentLike}
-                onReplyPress={handleReplyPress}
+                onReplyPress={onReplyPress}
                 incrementReplyLike={incrementReplyLike}
             />
-
-
         </View>
     );
 };
