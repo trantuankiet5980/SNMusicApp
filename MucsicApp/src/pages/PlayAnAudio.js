@@ -7,40 +7,60 @@ import IconEntypo from "react-native-vector-icons/Entypo";
 import { Audio } from 'expo-av';
 
 export default function PlayAnAudio({navigation, route }) {
-    const { mucsicSelected, sound } = route.params;
-    const slideAnim = useRef(new Animated.Value(0)).current;
-    const [isPlaying, setIsPlaying] = useState(true);
-  
-    useEffect(() => {
-        // Animation when opening component
-        Animated.timing(slideAnim, {
-            toValue: 1,
-            duration: 300,
-            useNativeDriver: true,
-        }).start();
+    const { mucsicSelected } = route.params;
+  const [sound, setSound] = useState();
+  const [isPlaying, setIsPlaying] = useState(true);
+  const slideAnim = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    // Animation when opening component
+    Animated.timing(slideAnim, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+    }).start();
 
-        // Don't stop sound on unmount since we want it to keep playing
-        return () => {};
-    }, []);
+    // Don't stop sound on unmount since we want it to keep playing
+    return () => {};
+}, []);
+  useEffect(() => {
+    const setupSound = async () => {
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: mucsicSelected.track.preview_url }
+      );
+      setSound(newSound);
 
-    const handlePlayPause = async () => {
-        if (isPlaying) {
-            await sound.pauseAsync();
-        } else {
-            await sound.playAsync();
-        }
-        setIsPlaying(!isPlaying);
+      // Start playing immediately
+      await newSound.playAsync();
     };
 
-    const handleClose = () => {
-        Animated.timing(slideAnim, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true,
-        }).start(() => {
-            navigation.goBack();
-        });
+    setupSound();
+
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
     };
+  }, [mucsicSelected]);
+
+  const handlePlayPause = async () => {
+    if (isPlaying) {
+      await sound.pauseAsync();
+    } else {
+      await sound.playAsync();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleClose = () => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      navigation.goBack();
+    });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1}}>
         <Animated.View
@@ -57,7 +77,7 @@ export default function PlayAnAudio({navigation, route }) {
         }}
       >
         <Image
-            source={{ uri: mucsicSelected.artwork }}
+            source={{ uri: mucsicSelected.track.album.images[0].url}}
             style={{ width: "100%", height: 900, position: "absolute", top: 0 }}
         />
         <View
@@ -80,10 +100,9 @@ export default function PlayAnAudio({navigation, route }) {
             </TouchableOpacity>
         </View>
         <View style={{width: '100%', height: 400, backgroundColor: 'black', marginTop: 500, opacity: 0.7, padding: 20}}>
-            <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 20}}>{mucsicSelected.artist}</Text>
-            <Text style={{color: '#fff', fontSize: 16, marginBottom: 30}}>{mucsicSelected.title}</Text>
+            <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 20}}>{mucsicSelected.track.name }</Text>
+            <Text style={{color: '#fff', fontSize: 16, marginBottom: 30}}>{mucsicSelected.track.artists[0].name}</Text>
             <Image source={require('../../assets/Play an Audio/Group 4.png')}/>
-            <Text style={{color: '#fff'}}>{mucsicSelected.time}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 20}}>
                 <TouchableOpacity>
                     <IconEntypo name="shuffle" size={30} color="#fff" />

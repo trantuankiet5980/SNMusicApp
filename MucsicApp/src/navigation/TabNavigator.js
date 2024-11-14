@@ -23,27 +23,7 @@ const HomeStackScreen = () => (
       component={HomeAudioListing}
       options={({ navigation }) => ({
         headerTitle: "",
-        headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("LaunchScreenPremium")}>
-            <Image
-              style={{ marginLeft: 20 }}
-              source={require("../../assets/Home - Audio Listing/Image 36.png")}
-            />
-          </TouchableOpacity>
-        ),
-        headerRight: () => (
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <TouchableOpacity>
-              <Icon name="bell" size={30} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                style={{ marginLeft: 20, marginRight: 20 }}
-                source={require("../../assets/Home - Audio Listing/Avatar 3.png")}
-              />
-            </TouchableOpacity>
-          </View>
-        ),
+        headerShown: false,
         headerShadowVisible: false,
       })}
     />
