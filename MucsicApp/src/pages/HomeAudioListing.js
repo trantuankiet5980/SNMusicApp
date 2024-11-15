@@ -98,7 +98,7 @@ export default function HomeAudioListing({ navigation, route }) {
                   height: 40,
                   borderRadius: 20,
                 }}
-                //   source={require("../../assets/Home - Audio Listing/Image 36.png")}
+                  // source={require("../../assets/Home - Audio Listing/Image 36.png")}
                 source={{ uri: user.images[0]?.url }}
               />
             </TouchableOpacity>
