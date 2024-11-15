@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import MyLibrary from "../pages/MyLibrary";
+import GeminiChatBox from "../pages/GeminiChatBox";
 import HomeAudioListing from "../pages/HomeAudioListing";
 import FeedAudioListing from "../pages/FeedAudioListing";
 import ArtistProfile from "../pages/ArtistProfile";
@@ -120,17 +120,12 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Your Library"
-        component={MyLibrary}
+        name="Chat Gemini"
+        component={GeminiChatBox}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="book" color={color} size={30} />
+            <IconEntypo name="chat" color={color} size={30} />
           ),
-          headerRight: () => (
-            <TouchableOpacity style={{ marginRight: 20 }}>
-              <Icon name="search" size={30} />
-            </TouchableOpacity>
-          )
         }}
       />
     </Tab.Navigator>
