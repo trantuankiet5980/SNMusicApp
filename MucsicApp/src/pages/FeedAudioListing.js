@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator, Modal, ScrollView, TextInput } from "react-native";
 import Feed from "../../assets/data/Feed.json";
 import IconEntypo from "react-native-vector-icons/Entypo";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 // Component to render individual audio feed item
 const FeedAudioItem = ({ item, onItemPress, likeCounts, loadingLikes, incrementLikeCount, onCommentPress, incrementCommentLike, onReplyPress }) => {
@@ -128,8 +130,22 @@ const CommentModal = ({ visible, comments, onClose, incrementCommentLike, onRepl
 
     return (
         <Modal visible={visible} transparent={true} animationType="slide">
-            <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center' }}>
-                <View style={{ margin: 20, backgroundColor: 'white', borderRadius: 10, padding: 20 }}>
+            <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '50%',  // Chiều cao modal là nửa màn hình
+                    backgroundColor: 'white',
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    padding: 20,
+                }}>
+                    {/* Icon đóng modal */}
+                    <TouchableOpacity onPress={onClose} style={{ position: 'absolute', top: 10, right: 10 }}>
+                        <IconEntypo name="chevron-up" size={24} color="gray" />
+                    </TouchableOpacity>
                     <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>Comments</Text>
                     <ScrollView>
                         {comments.map((comment, index) => (
@@ -203,26 +219,71 @@ const CommentModal = ({ visible, comments, onClose, incrementCommentLike, onRepl
                     </ScrollView>
                     {/* Reply Input */}
                     {replyingToComment !== null && (
-                        <View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
                             <TextInput
                                 value={newReply}
                                 onChangeText={handleReplyChange}
                                 placeholder="Write a reply..."
-                                style={{ borderColor: '#ccc', borderWidth: 1, padding: 8, borderRadius: 5, marginBottom: 10 }}
+                                style={{
+                                    flex: 1, // Chiếm toàn bộ không gian còn lại
+                                    borderColor: '#ccc',
+                                    borderWidth: 1,
+                                    padding: 8,
+                                    borderRadius: 5,
+                                    marginRight: 10, // Khoảng cách giữa TextInput và nút Submit
+                                }}
                             />
-                            <TouchableOpacity onPress={handleReplySubmit}>
-                                <Text style={{ color: 'blue', textAlign: 'right' }}>Submit</Text>
+                            <TouchableOpacity onPress={handleReplySubmit} style={{ padding: 8, backgroundColor: 'blue', borderRadius: 5 }}>
+                                <Text style={{ color: 'white', fontWeight: 'bold' }}>Submit</Text>
                             </TouchableOpacity>
                         </View>
                     )}
-                    <TouchableOpacity onPress={onClose} style={{ marginTop: 10 }}>
-                        <Text style={{ color: 'blue' }}>Close</Text>
-                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>
     );
 };
+
+const getLikesFromStorage = async () => {
+    try {
+        const likes = await AsyncStorage.getItem('likeCounts');
+        return likes ? JSON.parse(likes) : {};
+    } catch (e) {
+        console.error("Error getting likes from storage", e);
+        return {};
+    }
+};
+
+// Function to save likes to AsyncStorage
+const saveLikesToStorage = async (likeCounts) => {
+    try {
+        await AsyncStorage.setItem('likeCounts', JSON.stringify(likeCounts));
+    } catch (e) {
+        console.error("Error saving likes to storage", e);
+    }
+};
+
+// Function to get comments from AsyncStorage
+const getCommentsFromStorage = async () => {
+    try {
+        const comments = await AsyncStorage.getItem('comments');
+        return comments ? JSON.parse(comments) : {};
+    } catch (e) {
+        console.error("Error getting comments from storage", e);
+        return {};
+    }
+};
+
+// Function to save comments to AsyncStorage
+const saveCommentsToStorage = async (comments) => {
+    try {
+        await AsyncStorage.setItem('comments', JSON.stringify(comments));
+    } catch (e) {
+        console.error("Error saving comments to storage", e);
+    }
+};
+
+
 
 // Main Feed Screen Component
 const FeedScreen = () => {
@@ -230,6 +291,24 @@ const FeedScreen = () => {
     const [loadingLikes, setLoadingLikes] = useState({});
     const [commentsModalVisible, setCommentsModalVisible] = useState(false);
     const [currentComments, setCurrentComments] = useState([]);
+
+    // Load the persisted likes and comments when the component mounts
+    useEffect(() => {
+        const loadLikesAndComments = async () => {
+            const likes = await getLikesFromStorage();
+            setLikeCounts(likes);
+    
+            const comments = await getCommentsFromStorage();
+            setCurrentComments(comments);
+        };
+        loadLikesAndComments();
+    }, []);
+
+    // Save the like counts and comments when they change
+    useEffect(() => {
+        saveLikesToStorage(likeCounts);
+        saveCommentsToStorage(currentComments);
+    }, [likeCounts, currentComments]);
 
     const incrementLikeCount = (id) => {
         if (loadingLikes[id]) return; // Prevent multiple clicks while loading
@@ -244,37 +323,42 @@ const FeedScreen = () => {
     const onCommentPress = (id) => {
         const selectedPost = Feed.find(item => item.id === id);
         setCurrentComments(selectedPost?.interact[0].commentInteract || []);
+        console.log('Setting modal visible:', true); // Add logging
         setCommentsModalVisible(true);
     };
 
-    const incrementCommentLike = (commentId) => {
-        setCurrentComments(prevComments =>
-            prevComments.map(comment =>
+    const incrementCommentLike = async (commentId) => {
+        setCurrentComments(prevComments => {
+            const updatedComments = prevComments.map(comment =>
                 comment.idInteract === commentId
                     ? { ...comment, likeInteract: comment.likeInteract + 1 }
                     : comment
-            )
-        );
+            );
+    
+            // Save the updated comments with the new like counts to AsyncStorage
+            saveCommentsToStorage(updatedComments);
+            return updatedComments;
+        });
     };
-
+    
     const onReplyPress = (commentId, content) => {
         setCurrentComments(prevComments =>
             prevComments.map(comment =>
                 comment.idInteract === commentId
                     ? {
-                          ...comment,
-                          reply: [
-                              ...(comment.reply || []),
-                              {
-                                  idReply: new Date().getTime(),
-                                  contentReply: content,
-                                  timeReply: 'Just now',
-                                  likeReply: 0,
-                                  imageReply: 'https://path_to_reply_image.com',
-                                  nameReply: 'User Name'
-                              }
-                          ]
-                      }
+                        ...comment,
+                        reply: [
+                            ...(comment.reply || []),
+                            {
+                                idReply: new Date().getTime(),
+                                contentReply: content,
+                                timeReply: 'Just now',
+                                likeReply: 0,
+                                imageReply: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxPeUDB133aJoZXik3FwT4t18g2WRx_U-8_Q&s',
+                                nameReply: 'User Name'
+                            }
+                        ]
+                    }
                     : comment
             )
         );
@@ -285,13 +369,13 @@ const FeedScreen = () => {
             prevComments.map(comment =>
                 comment.reply
                     ? {
-                          ...comment,
-                          reply: comment.reply.map(reply =>
-                              reply.idReply === replyId
-                                  ? { ...reply, likeReply: reply.likeReply + 1 }
-                                  : reply
-                          )
-                      }
+                        ...comment,
+                        reply: comment.reply.map(reply =>
+                            reply.idReply === replyId
+                                ? { ...reply, likeReply: reply.likeReply + 1 }
+                                : reply
+                        )
+                    }
                     : comment
             )
         );
@@ -325,5 +409,4 @@ const FeedScreen = () => {
         </View>
     );
 };
-
 export default FeedScreen;
