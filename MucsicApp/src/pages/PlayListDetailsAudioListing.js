@@ -5,6 +5,9 @@ import { Audio } from "expo-av";
 import { PlayListAudio } from "../../src/components/PlayListAudio";
 import IconFeather from "react-native-vector-icons/Feather";
 import { LinearGradient } from "expo-linear-gradient";
+import IconEntypo from "react-native-vector-icons/Entypo";
+import playList from "../../assets/data/PlayList.json";
+import { audioMapping } from '../../assets/mucsic/AudioMapping';
 
 export default function PlayListDetailsAudioListing({ navigation, route }) {
   const { imageSource, name } = route.params;
@@ -15,51 +18,37 @@ export default function PlayListDetailsAudioListing({ navigation, route }) {
 
   const playSound = async (audioSource) => {
     try {
-      setIsLoading(true);
+        setIsLoading(true);
+        
+        if (sound) {
+            await sound.stopAsync();
+            await sound.unloadAsync();
+        }
 
-      // Check if the audioSource is a valid URL or valid asset
-      if (!audioSource || typeof audioSource !== "string") {
-        console.error("Invalid audio source:", audioSource);
-        setIsLoading(false);
-        return;
-      }
-
-      // Stop the current sound if it's already playing
-      if (sound) {
-        await sound.stopAsync();
-        await sound.unloadAsync();
-      }
-
-      const soundObject = new Audio.Sound();
-
-      try {
-        await soundObject.loadAsync({ uri: audioSource });
-        console.log("sound: " + audioSource);
+        const soundObject = new Audio.Sound();
+        const audioPath = audioMapping[audioSource];
+        
+        await soundObject.loadAsync(audioPath);
         setSound(soundObject);
-
+        
         await soundObject.playAsync();
         setIsPlaying(true);
         setIsLoading(false);
-
         soundObject.setOnPlaybackStatusUpdate((status) => {
-          if (status && status.didJustFinish) {
-            playNextSong();
-          }
+            if (status && status.didJustFinish) {
+                playNextSong();
+            }
         });
-      } catch (loadError) {
-        console.error("Error loading sound:", loadError);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.error("Error playing sound:", error);
-    }
-  };
 
+    } catch (error) {
+        setIsLoading(false);
+        console.error("Error playing sound:", error);
+    }
+};
   const handleItemPress = (item) => {
     if (!item || isLoading) return;
     setSelectedItem(item);
-    playSound(item.track.preview_url);
+    playSound(item.url);
   };
 
   const playNextSong = async () => {
@@ -205,13 +194,13 @@ export default function PlayListDetailsAudioListing({ navigation, route }) {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("PlayAnAudio", {
-                mucsicSelected: selectedItem,
+                mucsicSelected: selectedItem, sound
               })
             }
             style={{ flexDirection: "row" }}
           >
             <Image
-              source={{ uri: selectedItem.track.album.images[0].url }}
+              source={{ uri: selectedItem.artwork }}
               style={{
                 width: 50,
                 height: 50,
@@ -229,10 +218,10 @@ export default function PlayListDetailsAudioListing({ navigation, route }) {
                   marginBottom: 7,
                 }}
               >
-                {selectedItem.track.name}
+                {selectedItem.title}
               </Text>
               <Text style={{ color: "#fff" }}>
-                {selectedItem.track.artists[0].name}
+                {selectedItem.artist}
               </Text>
             </View>
           </TouchableOpacity>

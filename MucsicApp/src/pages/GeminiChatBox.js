@@ -7,14 +7,16 @@ export default function MyLibrary() {
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState("");
 
-  const API_KEY = "AIzaSyCwWYRq0PFojU0vsS2oJEGoiMo5f4lQg1k"; 
+  const API_KEY = "AIzaSyCwWYRq0PFojU0vsS2oJEGoiMo5f4lQg1k"; // Bảo mật API key
 
   useEffect(() => {
+    // Khởi tạo GoogleGenerativeAI chỉ cần thực hiện một lần khi ứng dụng được khởi động.
     const initChat = async () => {
       try {
         const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(API_KEY);
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
+        // Chào mừng mặc định từ bot
         setMessages([
           { text: "Hello! How can I assist you today?", user: false }
         ]);
