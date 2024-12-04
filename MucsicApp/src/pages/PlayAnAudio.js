@@ -7,17 +7,18 @@ import IconEntypo from "react-native-vector-icons/Entypo";
 import { Audio } from 'expo-av';
 
 export default function PlayAnAudio({navigation, route }) {
-    const { mucsicSelected } = route.params;
-  const [sound, setSound] = useState();
-  const [isPlaying, setIsPlaying] = useState(true);
+  const { mucsicSelected, sound } = route.params;
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const [isPlaying, setIsPlaying] = useState(true);
+
   useEffect(() => {
-    // Animation when opening component
-    Animated.timing(slideAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-    }).start();
+      // Animation when opening component
+      Animated.timing(slideAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+      }).start();
+
 
     // Don't stop sound on unmount since we want it to keep playing
     return () => {};
@@ -44,22 +45,22 @@ export default function PlayAnAudio({navigation, route }) {
 
   const handlePlayPause = async () => {
     if (isPlaying) {
-      await sound.pauseAsync();
+        await sound.pauseAsync();
     } else {
-      await sound.playAsync();
+        await sound.playAsync();
     }
     setIsPlaying(!isPlaying);
-  };
+};
 
-  const handleClose = () => {
+const handleClose = () => {
     Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
     }).start(() => {
-      navigation.goBack();
+        navigation.goBack();
     });
-  };
+};
 
   return (
     <SafeAreaView style={{ flex: 1}}>
@@ -77,7 +78,7 @@ export default function PlayAnAudio({navigation, route }) {
         }}
       >
         <Image
-            source={{ uri: mucsicSelected.track.album.images[0].url}}
+            source={{ uri: mucsicSelected.artwork }}
             style={{ width: "100%", height: 900, position: "absolute", top: 0 }}
         />
         <View
@@ -100,9 +101,10 @@ export default function PlayAnAudio({navigation, route }) {
             </TouchableOpacity>
         </View>
         <View style={{width: '100%', height: 400, backgroundColor: 'black', marginTop: 500, opacity: 0.7, padding: 20}}>
-            <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 20}}>{mucsicSelected.track.name }</Text>
-            <Text style={{color: '#fff', fontSize: 16, marginBottom: 30}}>{mucsicSelected.track.artists[0].name}</Text>
+            <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 20}}>{mucsicSelected.artist }</Text>
+            <Text style={{color: '#fff', fontSize: 16, marginBottom: 30}}>{mucsicSelected.title}</Text>
             <Image source={require('../../assets/Play an Audio/Group 4.png')}/>
+            <Text style={{color: '#fff'}}>{mucsicSelected.time}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 20}}>
                 <TouchableOpacity>
                     <IconEntypo name="shuffle" size={30} color="#fff" />
